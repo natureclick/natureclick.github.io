@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unplanned Photography - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <div class="logo">Unplanned Photography</div>
+            <ul class="nav-links">
+                <li><a onclick="showTab('home')" class="nav-item active" id="nav-home">Home</a></li>
+                <li><a onclick="showTab('photography')" class="nav-item" id="nav-photography">Photography</a></li>
+                <li><a onclick="showTab('about')" class="nav-item" id="nav-about">About Me</a></li>
+                <li><a onclick="showTab('contact')" class="nav-item" id="nav-contact">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 1. HOME SECTION -->
+    <section id="home" class="active">
+        <div class="hero">
+            <h1>Welcome to Unplanned Photography</h1>
+            <p>Capturing raw and unscripted moments through my lens</p>
+        </div>
+    </section>
+
+    <!-- 2. PHOTOGRAPHY SECTION -->
+    <section id="photography">
+        <div class="category-buttons">
+            <button class="cat-btn active" onclick="filterGallery('mountain', event)">Mountain</button>
+            <button class="cat-btn" onclick="filterGallery('animal', event)">Animals</button>
+            <button class="cat-btn" onclick="filterGallery('bird', event)">Birds</button>
+            <button class="cat-btn" onclick="filterGallery('flower', event)">Flowers</button>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Mountain Photos -->
+            <div class="photo-card mountain">
+                <img src="https://picsum.photos/600/400?random=1" alt="Himalayan Peak" data-description="A breathtaking sunset over the snow-capped Himalayan peaks." onclick="openModal(this)">
+                <div class="photo-info"><h3>Himalayan Peak</h3></div>
+            </div>
+            <div class="photo-card mountain">
+                <img src="https://picsum.photos/600/400?random=2" alt="Green Valley" data-description="Lush green mountain valley surrounded by soft morning clouds." onclick="openModal(this)">
+                <div class="photo-info"><h3>Green Valley</h3></div>
+            </div>
+
+            <!-- Animal Photos -->
+            <div class="photo-card animal">
+                <img src="https://picsum.photos/600/400?random=3" alt="Wild Tiger" data-description="A majestic Royal Bengal Tiger spotted deep inside the jungle." onclick="openModal(this)">
+                <div class="photo-info"><h3>Wild Tiger</h3></div>
+            </div>
+            <div class="photo-card animal">
+                <img src="https://picsum.photos/600/400?random=4" alt="Forest Deer" data-description="A herd of spotted deer grazing in the early golden light." onclick="openModal(this)">
+                <div class="photo-info"><h3>Forest Deer</h3></div>
+            </div>
+
+            <!-- Bird Photos -->
+            <div class="photo-card bird">
+                <img src="https://picsum.photos/600/400?random=5" alt="Kingfisher" data-description="A colorful kingfisher captured right before diving for a catch." onclick="openModal(this)">
+                <div class="photo-info"><h3>Kingfisher</h3></div>
+            </div>
+            <div class="photo-card bird">
+                <img src="https://picsum.photos/600/400?random=6" alt="Flying Eagle" data-description="An eagle soaring high above the open blue sky." onclick="openModal(this)">
+                <div class="photo-info"><h3>Flying Eagle</h3></div>
+            </div>
+
+            <!-- Flower Photos -->
+            <div class="photo-card flower">
+                <img src="https://i.postimg.cc/nLZPHdyJ/IMG-4107-Enhanced-SR.jpg" alt="A Little Bloom in the Wild" data-description="A delicate daisy blooming quietly on the forest floor, surrounded by deep shadows, fallen leaves and wild greenery. Its bright white petals and golden-yellow center stand out beautifully against the dark, moody background—capturing the quiet charm and untouched beauty of nature." onclick="openModal(this)">
+                <div class="photo-info"><h3>A Little Bloom in the Wild</h3></div>
+            </div>
+            <div class="photo-card flower">
+                <img src="https://picsum.photos/600/400?random=8" alt="Sunflower Field" data-description="A bright field full of blooming sunflowers facing the sun." onclick="openModal(this)">
+                <div class="photo-info"><h3>Sunflower Field</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ABOUT SECTION -->
+    <section id="about">
+        <div class="about-content">
+            <h2>About Unplanned Photography</h2>
+            <p>Hello! Welcome to Unplanned Photography. I am a passionate photographer who loves capturing nature, wildlife, and candid moments that happen spontaneously.</p>
+            <p>I believe the best photographs are often unplanned and unfiltered. Here, I showcase some of my favorite memories captured through my camera lens.</p>
+        </div>
+    </section>
+
+    <!-- 4. CONTACT SECTION -->
+    <section id="contact">
+        <div class="contact-content">
+            <h2>Get In Touch</h2>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="5" placeholder="Write your message or booking inquiry..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Unplanned Photography | All Rights Reserved</p>
+    </footer>
+
+    <!-- Fullscreen Image Modal Structure -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="fullImg">
+        <div id="caption"></div>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script>
+        // Tab Navigation Function
+        function showTab(tabId) {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            sections.forEach(sec => sec.classList.remove('active'));
+            navItems.forEach(item => item.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('nav-' + tabId).classList.add('active');
+
+            if (tabId === 'photography') {
+                filterGallery('mountain');
+            }
+        }
+
+        // Gallery Filter Function
+        function filterGallery(category, evt) {
+            const cards = document.querySelectorAll('.photo-card');
+            const catBtns = document.querySelectorAll('.cat-btn');
+
+            if (evt) {
+                catBtns.forEach(btn => btn.classList.remove('active'));
+                evt.target.classList.add('active');
+            }
+
+            cards.forEach(card => {
+                if (card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Open Fullscreen Modal Function (Title and Description Styling)
+        function openModal(imgElement) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("fullImg");
+            var captionText = document.getElementById("caption");
+            
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+            
+            var title = imgElement.alt || "";
+            var desc = imgElement.getAttribute("data-description") || "";
+            
+            captionText.innerHTML = `
+                <span class="modal-title">${title}</span>
+                <span class="modal-desc">${desc}</span>
+            `;
+        }
+
+        // Close Modal Function
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
