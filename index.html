@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wild Lens - Portfolio</title>
+    <!-- Beautiful Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,46 +45,30 @@
         <div class="gallery-grid">
             <!-- Mountain Photos -->
             <div class="photo-card mountain">
-                <img src="https://picsum.photos/600/400?random=1" alt="Himalayan Peak" data-id="himalayan-peak" data-description="A breathtaking sunset over the snow-capped Himalayan peaks." onclick="openModal(this)">
+                <img src="https://picsum.photos/600/400?random=1" alt="Himalayan Peak" data-id="himalayan-peak" data-location="Himalayas, India" data-description="A breathtaking sunset over the snow-capped Himalayan peaks." onclick="openModal(this)">
                 <div class="photo-info"><h3>Himalayan Peak</h3></div>
             </div>
             <div class="photo-card mountain">
-                <img src="https://picsum.photos/600/400?random=2" alt="Green Valley" data-id="green-valley" data-description="Lush green mountain valley surrounded by soft morning clouds." onclick="openModal(this)">
+                <img src="https://picsum.photos/600/400?random=2" alt="Green Valley" data-id="green-valley" data-location="Kashmir, India" data-description="Lush green mountain valley surrounded by soft morning clouds." onclick="openModal(this)">
                 <div class="photo-info"><h3>Green Valley</h3></div>
             </div>
 
             <!-- Animal Photos -->
             <div class="photo-card animal">
-    <img src="images/IMG_3751-Enhanced-SR.jpg" 
-         alt="The Silent Visitor of the Forest" 
-         data-id="the-silent-visitor-of-the-forest" 
-         data-description="Location: Assam, India | Deep within the lush forests of Assam, a wild Asian elephant quietly arrived at the water's edge to drink. Captured from a distance, this photograph preserves a beautiful and completely natural moment in the wilderness. Surrounded by dense greenery, calm water, and the untouched beauty of the forest, the elephant's peaceful presence reflects the raw and timeless rhythm of nature. No staged scene—just a fleeting encounter between a wildlife photographer and one of India's magnificent wild creatures." 
-         onclick="openModal(this)">
-    <div class="photo-info"><h3>The Silent Visitor of the Forest</h3></div>
-</div>
-            <div class="photo-card animal">
-                <img src="https://picsum.photos/600/400?random=4" alt="Forest Deer" data-id="forest-deer" data-description="A herd of spotted deer grazing in the early golden light." onclick="openModal(this)">
-                <div class="photo-info"><h3>Forest Deer</h3></div>
+                <img src="images/IMG_3751-Enhanced-SR.jpg" alt="The Silent Visitor of the Forest" data-id="the-silent-visitor-of-the-forest" data-location="Assam, India" data-description="Deep within the lush forests of Assam, a wild Asian elephant quietly arrived at the water's edge to drink. Captured from a distance, this photograph preserves a beautiful and completely natural moment in the wilderness. Surrounded by dense greenery, calm water, and the untouched beauty of the forest, the elephant's peaceful presence reflects the raw and timeless rhythm of nature. No staged scene—just a fleeting encounter between a wildlife photographer and one of India's magnificent wild creatures." onclick="openModal(this)">
+                <div class="photo-info"><h3>The Silent Visitor of the Forest</h3></div>
             </div>
 
             <!-- Bird Photos -->
             <div class="photo-card bird">
-                <img src="https://picsum.photos/600/400?random=5" alt="Kingfisher" data-id="kingfisher" data-description="A colorful kingfisher captured right before diving for a catch." onclick="openModal(this)">
+                <img src="https://picsum.photos/600/400?random=5" alt="Kingfisher" data-id="kingfisher" data-location="Sundarbans, India" data-description="A colorful kingfisher captured right before diving for a catch." onclick="openModal(this)">
                 <div class="photo-info"><h3>Kingfisher</h3></div>
-            </div>
-            <div class="photo-card bird">
-                <img src="https://picsum.photos/600/400?random=6" alt="Flying Eagle" data-id="flying-eagle" data-description="An eagle soaring high above the open blue sky." onclick="openModal(this)">
-                <div class="photo-info"><h3>Flying Eagle</h3></div>
             </div>
 
             <!-- Flower Photos -->
             <div class="photo-card flower">
-                <img src="https://i.postimg.cc/nLZPHdyJ/IMG-4107-Enhanced-SR.jpg" alt="A Little Bloom in the Wild" data-id="a-little-bloom-in-the-wild" data-description="A delicate daisy blooming quietly on the forest floor, surrounded by deep shadows, fallen leaves and wild greenery. Its bright white petals and golden-yellow center stand out beautifully against the dark, moody background—capturing the quiet charm and untouched beauty of nature." onclick="openModal(this)">
+                <img src="https://i.postimg.cc/nLZPHdyJ/IMG-4107-Enhanced-SR.jpg" alt="A Little Bloom in the Wild" data-id="a-little-bloom-in-the-wild" data-location="Forest Floor, India" data-description="A delicate daisy blooming quietly on the forest floor, surrounded by deep shadows, fallen leaves and wild greenery. Its bright white petals and golden-yellow center stand out beautifully against the dark, moody background—capturing the quiet charm and untouched beauty of nature." onclick="openModal(this)">
                 <div class="photo-info"><h3>A Little Bloom in the Wild</h3></div>
-            </div>
-            <div class="photo-card flower">
-                <img src="https://picsum.photos/600/400?random=8" alt="Sunflower Field" data-id="sunflower-field" data-description="A bright field full of blooming sunflowers facing the sun." onclick="openModal(this)">
-                <div class="photo-info"><h3>Sunflower Field</h3></div>
             </div>
         </div>
     </section>
@@ -172,11 +160,15 @@
             modalImg.src = imgElement.src;
             
             var title = imgElement.alt || "";
+            var location = imgElement.getAttribute("data-location") || "";
             var desc = imgElement.getAttribute("data-description") || "";
             var photoId = imgElement.getAttribute("data-id") || encodeURIComponent(title);
             
+            let locationHTML = location ? `<span class="modal-location">📍 ${location}</span>` : '';
+
             captionText.innerHTML = `
                 <span class="modal-title">${title}</span>
+                ${locationHTML}
                 <span class="modal-desc">${desc}</span>
             `;
 
@@ -188,7 +180,6 @@
             if (updateHash) window.location.hash = currentCategory;
         }
 
-        // Handle Direct Link/Hash Navigation on Page Load
         function handleHashChange() {
             const hash = window.location.hash.replace('#', '');
             if (!hash) {
