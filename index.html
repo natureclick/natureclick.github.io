@@ -17,10 +17,10 @@
         <nav>
             <div class="logo-container">
                 <a onclick="showTab('home')">
-                    <!-- লোগো ১: transparent.png চেষ্টা করবে, না পেলে logo.png এ যাবে, সেটিও না পেলে টেক্সট লোগো দেখাবে -->
+                    <!-- লোগো: প্রথমে transparent.png চেষ্টা করবে, ফাইল না পেলে logo.png দেখাবে, সেটিও না পেলে সুন্দর টেক্সট টাইটেল দেখাবে -->
                     <img id="main-logo" src="images/transparent.png" alt="Nature Click" class="nav-logo" 
                          onerror="if(this.src.includes('transparent.png')) { this.src='images/logo.png'; } else { this.style.display='none'; document.getElementById('alt-logo').style.display='block'; }">
-                    <span id="alt-logo" style="display:none; font-family:'Cinzel', serif; font-size:1.5rem; font-weight:bold; color:#52f3af;">Nature Click</span>
+                    <span id="alt-logo" style="display:none; font-family:'Cinzel', serif; font-size:1.6rem; font-weight:bold; color:#52f3af;">Nature Click</span>
                 </a>
             </div>
             <ul class="nav-links">
