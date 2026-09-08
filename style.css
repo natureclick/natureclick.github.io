@@ -253,7 +253,7 @@ section.active {
     letter-spacing: 1px;
     margin-bottom: 6px;
     display: block;
-    text-align: center; /* Title centered */
+    text-align: center;
 }
 
 .modal-location {
@@ -264,7 +264,7 @@ section.active {
     letter-spacing: 0.5px;
     margin-bottom: 12px;
     display: block;
-    text-align: center; /* Location centered */
+    text-align: center;
 }
 
 /* Description Alignment Left */
@@ -278,7 +278,7 @@ section.active {
     display: block;
     max-width: 750px;
     margin: 0 auto;
-    text-align: left; /* Left aligned description */
+    text-align: left;
 }
 
 .close {
