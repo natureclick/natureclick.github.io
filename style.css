@@ -44,9 +44,6 @@ nav {
     width: auto;
     object-fit: contain;
     display: block;
-    /* লোগোর ব্যাকগ্রাউন্ড হেডারের ব্যাকগ্রাউন্ডের সাথে ব্লেন্ড করার জন্য */
-    mix-blend-mode: screen; 
-    border-radius: 6px;
     transition: transform 0.3s ease;
 }
 
