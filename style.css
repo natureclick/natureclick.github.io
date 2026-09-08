@@ -12,7 +12,7 @@ body {
 
 /* Navigation Header */
 header {
-    background-color: #121816;
+    background-color: #121816; /* হেডার ব্যাকগ্রাউন্ড কালার */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -25,7 +25,7 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 6px 20px; /* প্যাডিং ব্যালেন্স করা হয়েছে */
+    padding: 8px 20px; /* লোগো বড় করায় হেডারের ওপর-নিচের প্যাডিং ব্যালেন্স করা হয়েছে */
 }
 
 .logo-container {
@@ -40,15 +40,16 @@ nav {
     text-decoration: none;
 }
 
-/* বড় এবং পারফেক্ট ট্রান্সপারেন্ট লোগো স্টাইল */
+/* বড় এবং পারফেক্ট মেলানো লোগো স্টাইল */
 .nav-logo {
-    height: 85px; /* বড় এবং দৃষ্টিনন্দন সাইজ */
+    height: 85px; /* লোগোর সাইজ অনেকখানি বড় করা হয়েছে */
     width: auto;
     object-fit: contain;
     display: block;
-    background-color: transparent; /* ব্যাকগ্রাউন্ড থাকবে না */
-    padding: 4px 0; /* সুন্দর গ্যাপ/প্যাডিং */
-    transition: transform 0.3s ease;
+    background-color: #121816; /* হেডারের সাথে ১০০% ব্যাকগ্রাউন্ড কালার ম্যাচিং */
+    padding: 2px 6px; /* লোগোর চারপাশে সূক্ষ্ম প্যাডিং */
+    border-radius: 4px;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .nav-logo:hover {
@@ -338,11 +339,11 @@ footer {
 @media screen and (max-width: 600px) {
     nav {
         flex-direction: column;
-        gap: 12px;
+        gap: 15px;
     }
 
     .nav-logo {
-        height: 60px; /* মোবাইলেও উপযুক্ত সাইজ */
+        height: 60px; /* মোবাইলেও পর্যাপ্ত বড় দেখাবে */
     }
 
     .gallery-grid {
