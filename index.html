@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nature click - Portfolio</title>
+    <title>Nature Click - Portfolio</title>
     <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,11 @@
     <!-- Navigation Header -->
     <header>
         <nav>
-            <div class="logo">Nature click</div>
+            <div class="logo-container">
+                <a onclick="showTab('home')">
+                    <img src="images/logo.png" alt="Nature Click Logo" class="nav-logo">
+                </a>
+            </div>
             <ul class="nav-links">
                 <li><a onclick="showTab('home')" class="nav-item active" id="nav-home">Home</a></li>
                 <li><a onclick="showTab('photography')" class="nav-item" id="nav-photography">Photography</a></li>
@@ -28,7 +32,7 @@
     <!-- 1. HOME SECTION -->
     <section id="home" class="active">
         <div class="hero">
-            <h1>Welcome to Nature click</h1>
+            <h1>Welcome to Nature Click</h1>
             <p>Capturing raw and unscripted moments through my lens</p>
         </div>
     </section>
@@ -84,8 +88,8 @@
     <!-- 3. ABOUT SECTION -->
     <section id="about">
         <div class="about-content">
-            <h2>About Nature click</h2>
-            <p>Hello! Welcome to Nature click. I am a passionate photographer who loves capturing nature, wildlife, and candid moments that happen spontaneously.</p>
+            <h2>About Nature Click</h2>
+            <p>Hello! Welcome to Nature Click. I am a passionate photographer who loves capturing nature, wildlife, and candid moments that happen spontaneously.</p>
             <p>I believe the best photographs are often unplanned and unfiltered. Here, I showcase some of my favorite memories captured through my camera lens.</p>
         </div>
     </section>
@@ -94,7 +98,6 @@
     <section id="contact">
         <div class="contact-content">
             <h2>Get In Touch</h2>
-            <!-- Note: Replace the action URL with your Formspree endpoint -->
             <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
@@ -105,7 +108,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Nature click | All Rights Reserved</p>
+        <p>&copy; 2026 Nature Click | All Rights Reserved</p>
     </footer>
 
     <!-- Fullscreen Image Modal Structure -->
