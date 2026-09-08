@@ -12,11 +12,11 @@ body {
 
 /* Navigation Header */
 header {
-    background-color: #121816;
+    background-color: #121816; /* হেডার ব্যাকগ্রাউন্ড কালার */
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
 }
 
 nav {
@@ -25,7 +25,7 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 8px 20px; /* লোগো বড় করায় হেডারের ওপর-নিচের প্যাডিং ব্যালেন্স করা হয়েছে */
 }
 
 .logo-container {
@@ -37,18 +37,23 @@ nav {
     cursor: pointer;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
+/* বড় এবং পারফেক্ট মেলানো লোগো স্টাইল */
 .nav-logo {
-    height: 65px;
+    height: 85px; /* লোগোর সাইজ অনেকখানি বড় করা হয়েছে */
     width: auto;
     object-fit: contain;
     display: block;
-    transition: transform 0.3s ease;
+    background-color: #121816; /* হেডারের সাথে ১০০% ব্যাকগ্রাউন্ড কালার ম্যাচিং */
+    padding: 2px 6px; /* লোগোর চারপাশে সূক্ষ্ম প্যাডিং */
+    border-radius: 4px;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .nav-logo:hover {
-    transform: scale(1.04);
+    transform: scale(1.05); /* হালকা বড় হওয়ার ইফেক্ট */
 }
 
 .nav-links {
@@ -58,13 +63,13 @@ nav {
 }
 
 .nav-links li {
-    margin-left: 25px;
+    margin-left: 30px;
 }
 
 .nav-links a {
     color: #ccc;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 500;
     transition: color 0.3s;
     cursor: pointer;
@@ -338,7 +343,7 @@ footer {
     }
 
     .nav-logo {
-        height: 50px;
+        height: 60px; /* মোবাইলেও পর্যাপ্ত বড় দেখাবে */
     }
 
     .gallery-grid {
