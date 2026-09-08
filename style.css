@@ -10,7 +10,7 @@ body {
     color: #fff;
 }
 
-/* Navigation Bar */
+/* Navigation Header */
 header {
     background-color: #121816;
     position: sticky;
@@ -28,6 +28,11 @@ nav {
     padding: 10px 20px;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
 .logo-container a {
     cursor: pointer;
     display: flex;
@@ -35,18 +40,23 @@ nav {
 }
 
 .nav-logo {
-    height: 50px;
+    height: 65px;
     width: auto;
     object-fit: contain;
+    display: block;
+    /* লোগোর ব্যাকগ্রাউন্ড হেডারের ব্যাকগ্রাউন্ডের সাথে ব্লেন্ড করার জন্য */
+    mix-blend-mode: screen; 
+    border-radius: 6px;
     transition: transform 0.3s ease;
 }
 
 .nav-logo:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .nav-links {
     display: flex;
+    align-items: center;
     list-style: none;
 }
 
@@ -64,7 +74,7 @@ nav {
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: #52f3af; /* Logo Accent Color */
+    color: #52f3af;
 }
 
 /* Sections */
@@ -331,7 +341,7 @@ footer {
     }
 
     .nav-logo {
-        height: 42px;
+        height: 50px;
     }
 
     .gallery-grid {
