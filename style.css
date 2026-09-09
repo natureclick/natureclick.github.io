@@ -6,17 +6,17 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #0f0f0f;
+    background-color: #0d1211;
     color: #fff;
 }
 
-/* Navigation Bar */
+/* Navigation Header */
 header {
-    background-color: #1a1a1a;
+    background-color: #121816;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
 nav {
@@ -25,37 +25,54 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
-.logo {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #27F595;
-    text-transform: uppercase;
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container a {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-logo {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.04);
 }
 
 .nav-links {
     display: flex;
+    align-items: center;
     list-style: none;
 }
 
 .nav-links li {
-    margin-left: 20px;
+    margin-left: 25px;
 }
 
 .nav-links a {
     color: #ccc;
     text-decoration: none;
     font-size: 1rem;
+    font-weight: 500;
     transition: color 0.3s;
     cursor: pointer;
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: #00adb5;
+    color: #52f3af;
 }
 
 /* Sections */
@@ -75,7 +92,7 @@ section.active {
 .hero {
     text-align: center;
     padding: 120px 20px;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.postimg.cc/j2YfmpVP/53145940818-70791fe6c3-o.jpg');
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.postimg.cc/j2YfmpVP/53145940818-70791fe6c3-o.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -91,6 +108,7 @@ section.active {
     font-family: 'Cinzel', serif;
     font-size: 3rem;
     margin-bottom: 15px;
+    color: #ffffff;
 }
 
 .hero p {
@@ -108,21 +126,23 @@ section.active {
 }
 
 .cat-btn {
-    background-color: #222;
+    background-color: #1a2320;
     color: #fff;
-    border: 1px solid #00adb5;
-    padding: 10px 20px;
+    border: 1px solid #52f3af;
+    padding: 10px 22px;
     border-radius: 20px;
     cursor: pointer;
+    font-weight: 500;
     transition: 0.3s;
 }
 
 .cat-btn:hover, .cat-btn.active {
-    background-color: #00adb5;
-    color: #fff;
+    background-color: #52f3af;
+    color: #0d1211;
+    font-weight: 600;
 }
 
-/* 4-Column Gallery Grid */
+/* Gallery Grid */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -133,7 +153,7 @@ section.active {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    background-color: #222;
+    background-color: #161e1b;
 }
 
 .photo-card img {
@@ -164,14 +184,15 @@ section.active {
 .about-content, .contact-content {
     max-width: 700px;
     margin: 0 auto;
-    background-color: #1a1a1a;
+    background-color: #161e1b;
     padding: 40px;
     border-radius: 10px;
+    border: 1px solid #23312c;
 }
 
 .about-content h2, .contact-content h2 {
     font-family: 'Cinzel', serif;
-    color: #00adb5;
+    color: #52f3af;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -191,17 +212,17 @@ section.active {
 .contact-form input, .contact-form textarea {
     width: 100%;
     padding: 12px;
-    background-color: #2a2a2a;
-    border: 1px solid #444;
+    background-color: #202b27;
+    border: 1px solid #32443e;
     color: #fff;
     border-radius: 5px;
 }
 
 .contact-form button {
     padding: 12px;
-    background-color: #00adb5;
+    background-color: #52f3af;
     border: none;
-    color: #fff;
+    color: #0d1211;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
@@ -209,10 +230,10 @@ section.active {
 }
 
 .contact-form button:hover {
-    background-color: #008c93;
+    background-color: #3ee29c;
 }
 
-/* Fullscreen Lightbox Modal */
+/* Lightbox Modal */
 .modal {
     display: none; 
     position: fixed; 
@@ -233,10 +254,9 @@ section.active {
     max-height: 75vh;
     border-radius: 8px;
     object-fit: contain;
-    box-shadow: 0 0 25px rgba(0, 173, 181, 0.4);
+    box-shadow: 0 0 25px rgba(82, 243, 175, 0.25);
 }
 
-/* Lightbox Caption Styling */
 #caption {
     margin: auto;
     display: block;
@@ -258,7 +278,7 @@ section.active {
 
 .modal-location {
     font-family: 'Montserrat', sans-serif;
-    color: #27F595;
+    color: #52f3af;
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -267,10 +287,9 @@ section.active {
     text-align: center;
 }
 
-/* Description Alignment Left */
 .modal-desc {
     font-family: 'Montserrat', sans-serif;
-    color: #00adb5;
+    color: #cfdfda;
     font-size: 1rem;
     font-style: italic;
     font-weight: 300;
@@ -294,14 +313,14 @@ section.active {
 }
 
 .close:hover {
-    color: #27F595;
+    color: #52f3af;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #1a1a1a;
+    background-color: #121816;
     color: #777;
     margin-top: 40px;
 }
@@ -319,23 +338,11 @@ footer {
         gap: 15px;
     }
 
-    .logo {
-        font-size: 1.7rem;
+    .nav-logo {
+        height: 50px;
     }
 
     .gallery-grid {
         grid-template-columns: repeat(1, 1fr);
-    }
-
-    .modal-title {
-        font-size: 1.3rem;
-    }
-
-    .modal-location {
-        font-size: 0.85rem;
-    }
-
-    .modal-desc {
-        font-size: 0.9rem;
     }
 }
