@@ -69,11 +69,11 @@ nav {
     gap: 4px;
 }
 
-/* Chiller / Creepster Font for "Munna" - Exactly Matched with "By" Size */
+/* Chiller / Creepster Font for "Munna" - Normal Weight (Not Bold) */
 .signature-text {
     font-family: 'Creepster', 'Chiller', cursive, sans-serif !important;
     font-size: 0.95rem !important;
-    font-weight: bold !important;
+    font-weight: normal !important;
     color: #52f3af !important;
     letter-spacing: 0.5px;
     line-height: 1;
