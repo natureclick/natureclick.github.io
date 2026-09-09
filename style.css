@@ -58,25 +58,25 @@ nav {
 /* Green Color for "By Munna" Sub-logo */
 .sub-logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: #52f3af;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     opacity: 0.95;
     margin-top: 2px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
-/* Signature & Stylized Font for "Munna" in Bold Green */
+/* Signature Font for "Munna" - Adjusted Size to match "By" */
 .signature-text {
     font-family: 'Caveat', 'Chiller', cursive, sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.15rem; /* Size reduced to blend perfectly with "By" */
     font-weight: 700;
     color: #52f3af;
-    letter-spacing: 1px;
-    line-height: 0.8;
+    letter-spacing: 0.5px;
+    line-height: 1;
 }
 
 /* Navigation Links & Instagram Container */
