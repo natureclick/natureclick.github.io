@@ -69,7 +69,7 @@ nav {
     gap: 4px;
 }
 
-/* Chiller / Creepster Font for "Munna" - Normal Weight (Not Bold) */
+/* Chiller / Creepster Font for "Munna" - Normal Weight */
 .signature-text {
     font-family: 'Creepster', 'Chiller', cursive, sans-serif !important;
     font-size: 0.95rem !important;
@@ -301,36 +301,38 @@ section.active {
     background-color: #3ee29c;
 }
 
-/* Lightbox Modal */
+/* Lightbox Modal (Updated for Large View Size) */
 .modal {
     display: none; 
     position: fixed; 
     z-index: 9999; 
-    padding-top: 20px; 
+    padding: 30px 10px; 
     left: 0;
     top: 0;
     width: 100%; 
     height: 100%; 
-    overflow: auto; 
+    overflow-y: auto; 
     background-color: rgba(0, 0, 0, 0.95); 
 }
 
 .modal-content {
-    margin: auto;
+    margin: 0 auto;
     display: block;
     max-width: 95%;
-    max-height: 75vh;
-    border-radius: 8px;
+    max-height: 88vh; /* Large scale photo size */
+    width: auto;
+    height: auto;
+    border-radius: 6px;
     object-fit: contain;
-    box-shadow: 0 0 25px rgba(82, 243, 175, 0.25);
+    box-shadow: 0 0 35px rgba(82, 243, 175, 0.3);
 }
 
 #caption {
-    margin: auto;
+    margin: 15px auto 30px auto;
     display: block;
     width: 90%;
-    max-width: 850px;
-    padding: 20px 0;
+    max-width: 900px;
+    text-align: center;
 }
 
 .modal-title {
@@ -363,13 +365,13 @@ section.active {
     font-weight: 300;
     line-height: 1.6;
     display: block;
-    max-width: 750px;
+    max-width: 800px;
     margin: 0 auto;
     text-align: left;
 }
 
 .close {
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 25px;
     color: #fff;
