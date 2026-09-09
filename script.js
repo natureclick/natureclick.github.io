@@ -1,35 +1,44 @@
-let currentCategory = 'mountain';
-
-function showTab(tabId, updateHash = true) {
+// Tab Switcher (Home, Photography, About, Contact)
+function showTab(tabId) {
+    // Hide all sections
     const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // Remove active class from all nav items
     const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.classList.remove('active');
+    });
 
-    sections.forEach(sec => sec.classList.remove('active'));
-    navItems.forEach(item => item.classList.remove('active'));
-
+    // Show target section
     const targetSection = document.getElementById(tabId);
-    const targetNav = document.getElementById('nav-' + tabId);
-
-    if (targetSection) targetSection.classList.add('active');
-    if (targetNav) targetNav.classList.add('active');
-
-    if (tabId === 'photography') {
-        filterGallery(currentCategory, null, false);
-        if (updateHash) window.location.hash = currentCategory;
-    } else if (updateHash) {
-        window.location.hash = tabId;
+    if (targetSection) {
+        targetSection.classList.add('active');
     }
+
+    // Set active nav link
+    const targetNav = document.getElementById('nav-' + tabId);
+    if (targetNav) {
+        targetNav.classList.add('active');
+    }
+
+    // If photography tab clicked, default to mountain category
+    if (tabId === 'photography') {
+        const mountainBtn = document.getElementById('btn-mountain');
+        if (mountainBtn) {
+            filterGallery('mountain', { target: mountainBtn });
+        }
+    }
+
+    // Scroll back to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function filterGallery(category, evt, updateHash = true) {
-    currentCategory = category;
+// Gallery Filter Functionality
+function filterGallery(category, event) {
     const cards = document.querySelectorAll('.photo-card');
-    const catBtns = document.querySelectorAll('.cat-btn');
-
-    catBtns.forEach(btn => btn.classList.remove('active'));
-    const activeBtn = document.getElementById('btn-' + category) || (evt ? evt.target : null);
-    if (activeBtn) activeBtn.classList.add('active');
-
     cards.forEach(card => {
         if (card.classList.contains(category)) {
             card.style.display = 'block';
@@ -38,63 +47,60 @@ function filterGallery(category, evt, updateHash = true) {
         }
     });
 
-    if (updateHash) window.location.hash = category;
+    // Update active class on category buttons
+    const catButtons = document.querySelectorAll('.cat-btn');
+    catButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
 }
 
-function openModal(imgElement, updateHash = true) {
-    var modal = document.getElementById("imageModal");
-    var modalImg = document.getElementById("fullImg");
-    var captionText = document.getElementById("caption");
-    
-    modal.style.display = "block";
+// Lightbox Modal Functions
+function openModal(imgElement) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('fullImg');
+    const captionText = document.getElementById('caption');
+
+    const title = imgElement.alt || '';
+    const location = imgElement.getAttribute('data-location') || '';
+    const description = imgElement.getAttribute('data-description') || '';
+
+    modal.style.display = 'block';
     modalImg.src = imgElement.src;
-    
-    var title = imgElement.alt || "";
-    var location = imgElement.getAttribute("data-location") || "";
-    var desc = imgElement.getAttribute("data-description") || "";
-    var photoId = imgElement.getAttribute("data-id") || encodeURIComponent(title);
-    
-    let locationHTML = location ? `<span class="modal-location">📍 ${location}</span>` : '';
 
     captionText.innerHTML = `
         <span class="modal-title">${title}</span>
-        ${locationHTML}
-        <span class="modal-desc">${desc}</span>
+        <span class="modal-location">📍 ${location}</span>
+        <p class="modal-desc">${description}</p>
     `;
-
-    if (updateHash) window.location.hash = 'photo-' + photoId;
+    
+    document.body.style.overflow = 'hidden'; // Stop background scrolling
 }
 
-function closeModal(updateHash = true) {
-    document.getElementById("imageModal").style.display = "none";
-    if (updateHash) window.location.hash = currentCategory;
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable background scrolling
 }
 
-function handleHashChange() {
-    const hash = window.location.hash.replace('#', '');
-    if (!hash) {
-        showTab('home', false);
-        return;
+// Close modal when pressing Esc key or clicking outside image
+window.onclick = function(event) {
+    const modal = document.getElementById('imageModal');
+    if (event.target === modal) {
+        closeModal();
     }
+};
 
-    if (hash.startsWith('photo-')) {
-        const photoId = hash.replace('photo-', '');
-        showTab('photography', false);
-        const targetImg = document.querySelector(`img[data-id="${photoId}"]`);
-        if (targetImg) {
-            const parentCard = targetImg.closest('.photo-card');
-            const classes = Array.from(parentCard.classList);
-            const category = classes.find(c => c !== 'photo-card');
-            if (category) filterGallery(category, null, false);
-            openModal(targetImg, false);
-        }
-    } else if (['mountain', 'animal', 'bird', 'flower'].includes(hash)) {
-        showTab('photography', false);
-        filterGallery(hash, null, false);
-    } else if (['home', 'photography', 'about', 'contact'].includes(hash)) {
-        showTab(hash, false);
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
     }
-}
+});
 
-window.addEventListener('load', handleHashChange);
-window.addEventListener('hashchange', handleHashChange);
+// Initialize default tab on page load
+document.addEventListener('DOMContentLoaded', () => {
+    filterGallery('mountain', { target: document.getElementById('btn-mountain') });
+});
