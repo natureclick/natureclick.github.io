@@ -38,28 +38,29 @@ nav {
 .logo-container a {
     cursor: pointer;
     display: flex;
-    flex-direction: column; /* লেখার নিচে লেখা সাজানোর জন্য */
+    flex-direction: column;
     align-items: flex-start;
     text-decoration: none;
 }
 
+/* আগের অরিজিনাল Cinzel ফন্ট ও সবুজ (#52f3af) কালার */
 .text-logo {
     font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: #52f3af;
-    letter-spacing: 0.5px;
     line-height: 1.1;
 }
 
+/* নিচে সাবটাইটেল হিসেবে ছোট সাদা ফন্টে By Munna */
 .sub-logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 300;
     color: #ffffff;
-    letter-spacing: 2px; /* লেখাটিকে আকর্ষণীয় করার স্পেসিং */
+    letter-spacing: 2px;
     opacity: 0.85;
-    margin-top: 2px;
+    margin-top: 3px;
 }
 
 .nav-links {
@@ -98,7 +99,7 @@ section.active {
     display: block;
 }
 
-/* Home Section Override to Cover Full Screen Width (No Black Side Bars) */
+/* Home Section Override to Cover Full Screen Width */
 #home {
     padding: 0 !important;
     max-width: 100% !important;
