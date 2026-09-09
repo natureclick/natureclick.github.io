@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nature click - Portfolio</title>
+    <title>Nature Click - Portfolio</title>
     <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,12 @@
     <!-- Navigation Header -->
     <header>
         <nav>
-            <div class="logo">Nature click</div>
+            <div class="logo-container">
+                <a onclick="showTab('home')">
+                    <img id="main-logo" src="images/logo.png" alt="Nature Click" class="nav-logo" onerror="this.style.display='none'; document.getElementById('alt-logo').style.display='block';">
+                    <span id="alt-logo" style="display:none; font-family:'Cinzel', serif; font-size:1.5rem; font-weight:bold; color:#52f3af;">Nature Click</span>
+                </a>
+            </div>
             <ul class="nav-links">
                 <li><a onclick="showTab('home')" class="nav-item active" id="nav-home">Home</a></li>
                 <li><a onclick="showTab('photography')" class="nav-item" id="nav-photography">Photography</a></li>
@@ -28,7 +33,7 @@
     <!-- 1. HOME SECTION -->
     <section id="home" class="active">
         <div class="hero">
-            <h1>Welcome to Nature click</h1>
+            <h1>Welcome to Nature Click</h1>
             <p>Capturing raw and unscripted moments through my lens</p>
         </div>
     </section>
@@ -65,6 +70,10 @@
 
             <!-- Bird Photos -->
             <div class="photo-card bird">
+                <img src="images/IMG_4179.jpg" alt="Flying Asian Openbill." data-id="flying-asian-openbill" data-location="Duttapukur, West Bengal, India." data-description="Captured on a cloudy day over an open field in Duttapukur, West Bengal, this Asian Openbill glides gracefully across the deep blue-grey sky. With its long neck, distinctive bill, broad wings and contrasting black-and-white plumage, the bird creates a striking silhouette against the vast open sky. The simplicity of the scene—the flying stork, the cloudy atmosphere and the endless sky—captures a quiet moment of freedom in nature." onclick="openModal(this)">
+                <div class="photo-info"><h3>Flying Asian Openbill.</h3></div>
+            </div>
+            <div class="photo-card bird">
                 <img src="https://picsum.photos/600/400?random=5" alt="Kingfisher" data-id="kingfisher" data-location="Sundarbans, India" data-description="A colorful kingfisher captured right before diving for a catch." onclick="openModal(this)">
                 <div class="photo-info"><h3>Kingfisher</h3></div>
             </div>
@@ -80,8 +89,8 @@
     <!-- 3. ABOUT SECTION -->
     <section id="about">
         <div class="about-content">
-            <h2>About Nature click</h2>
-            <p>Hello! Welcome to Nature click. I am a passionate photographer who loves capturing nature, wildlife, and candid moments that happen spontaneously.</p>
+            <h2>About Nature Click</h2>
+            <p>Hello! Welcome to Nature Click. I am a passionate photographer who loves capturing nature, wildlife, and candid moments that happen spontaneously.</p>
             <p>I believe the best photographs are often unplanned and unfiltered. Here, I showcase some of my favorite memories captured through my camera lens.</p>
         </div>
     </section>
@@ -90,7 +99,6 @@
     <section id="contact">
         <div class="contact-content">
             <h2>Get In Touch</h2>
-            <!-- Note: Replace the action URL with your Formspree endpoint -->
             <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
@@ -101,7 +109,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Nature click | All Rights Reserved</p>
+        <p>&copy; 2026 Nature Click | All Rights Reserved</p>
     </footer>
 
     <!-- Fullscreen Image Modal Structure -->
@@ -111,108 +119,6 @@
         <div id="caption"></div>
     </div>
 
-    <!-- JavaScript Code -->
-    <script>
-        let currentCategory = 'mountain';
-
-        function showTab(tabId, updateHash = true) {
-            const sections = document.querySelectorAll('section');
-            const navItems = document.querySelectorAll('.nav-item');
-
-            sections.forEach(sec => sec.classList.remove('active'));
-            navItems.forEach(item => item.classList.remove('active'));
-
-            const targetSection = document.getElementById(tabId);
-            const targetNav = document.getElementById('nav-' + tabId);
-
-            if (targetSection) targetSection.classList.add('active');
-            if (targetNav) targetNav.classList.add('active');
-
-            if (tabId === 'photography') {
-                filterGallery(currentCategory, null, false);
-                if (updateHash) window.location.hash = currentCategory;
-            } else if (updateHash) {
-                window.location.hash = tabId;
-            }
-        }
-
-        function filterGallery(category, evt, updateHash = true) {
-            currentCategory = category;
-            const cards = document.querySelectorAll('.photo-card');
-            const catBtns = document.querySelectorAll('.cat-btn');
-
-            catBtns.forEach(btn => btn.classList.remove('active'));
-            const activeBtn = document.getElementById('btn-' + category) || (evt ? evt.target : null);
-            if (activeBtn) activeBtn.classList.add('active');
-
-            cards.forEach(card => {
-                if (card.classList.contains(category)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            if (updateHash) window.location.hash = category;
-        }
-
-        function openModal(imgElement, updateHash = true) {
-            var modal = document.getElementById("imageModal");
-            var modalImg = document.getElementById("fullImg");
-            var captionText = document.getElementById("caption");
-            
-            modal.style.display = "block";
-            modalImg.src = imgElement.src;
-            
-            var title = imgElement.alt || "";
-            var location = imgElement.getAttribute("data-location") || "";
-            var desc = imgElement.getAttribute("data-description") || "";
-            var photoId = imgElement.getAttribute("data-id") || encodeURIComponent(title);
-            
-            let locationHTML = location ? `<span class="modal-location">📍 ${location}</span>` : '';
-
-            captionText.innerHTML = `
-                <span class="modal-title">${title}</span>
-                ${locationHTML}
-                <span class="modal-desc">${desc}</span>
-            `;
-
-            if (updateHash) window.location.hash = 'photo-' + photoId;
-        }
-
-        function closeModal(updateHash = true) {
-            document.getElementById("imageModal").style.display = "none";
-            if (updateHash) window.location.hash = currentCategory;
-        }
-
-        function handleHashChange() {
-            const hash = window.location.hash.replace('#', '');
-            if (!hash) {
-                showTab('home', false);
-                return;
-            }
-
-            if (hash.startsWith('photo-')) {
-                const photoId = hash.replace('photo-', '');
-                showTab('photography', false);
-                const targetImg = document.querySelector(`img[data-id="${photoId}"]`);
-                if (targetImg) {
-                    const parentCard = targetImg.closest('.photo-card');
-                    const classes = Array.from(parentCard.classList);
-                    const category = classes.find(c => c !== 'photo-card');
-                    if (category) filterGallery(category, null, false);
-                    openModal(targetImg, false);
-                }
-            } else if (['mountain', 'animal', 'bird', 'flower'].includes(hash)) {
-                showTab('photography', false);
-                filterGallery(hash, null, false);
-            } else if (['home', 'photography', 'about', 'contact'].includes(hash)) {
-                showTab(hash, false);
-            }
-        }
-
-        window.addEventListener('load', handleHashChange);
-        window.addEventListener('hashchange', handleHashChange);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
