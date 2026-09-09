@@ -58,7 +58,7 @@ nav {
 /* Green Color for "By Munna" Sub-logo */
 .sub-logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #52f3af;
     letter-spacing: 1.5px;
@@ -66,17 +66,17 @@ nav {
     margin-top: 2px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
-/* Microsoft Chiller font for "Munna" in Bold */
+/* Signature & Stylized Font for "Munna" in Bold Green */
 .signature-text {
-    font-family: 'Chiller', cursive, sans-serif;
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-family: 'Caveat', 'Chiller', cursive, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: #52f3af;
     letter-spacing: 1px;
-    line-height: 1;
+    line-height: 0.8;
 }
 
 /* Navigation Links & Instagram Container */
