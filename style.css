@@ -8,6 +8,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #0d1211;
     color: #fff;
+    overflow-x: hidden; /* স্ক্রিনের বাইরে কোনো স্ক্রোলবার যেন না আসে */
 }
 
 /* Navigation Header */
@@ -75,7 +76,7 @@ nav {
     color: #52f3af;
 }
 
-/* Sections */
+/* Base Sections setup */
 section {
     display: none;
     padding: 60px 20px;
@@ -88,14 +89,15 @@ section.active {
     display: block;
 }
 
-/* Home Section Specifically Adjusted to Full Screen Under Header */
+/* Home Section Override to Cover Full Screen Width (No Black Side Bars) */
 #home {
     padding: 0 !important;
     max-width: 100% !important;
+    width: 100% !important;
     margin: 0 !important;
 }
 
-/* Home Hero Area (Header-এর প্যাডিং বাদ দিয়ে পুরো স্ক্রিন জুড়ে ছবি) */
+/* Home Hero Area */
 .hero {
     text-align: center;
     padding: 20px;
@@ -103,14 +105,14 @@ section.active {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* হেডার বাদ দিয়ে সম্পূর্ণ স্ক্রিন সাইজ হিসাব */
+    /* হেডার বাদ দিয়ে সম্পূর্ণ ভিউপোর্ট জুড়ে ছড়িয়ে যাওয়ার হিসাব */
     min-height: calc(100vh - 85px); 
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 0; /* ফুল স্ক্রিনের সাথে বর্ডার রাউন্ড বাদ দেওয়া হয়েছে */
+    border-radius: 0;
 }
 
 .hero h1 {
