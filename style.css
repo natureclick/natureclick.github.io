@@ -8,7 +8,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #0d1211;
     color: #fff;
-    overflow-x: hidden; /* স্ক্রিনের বাইরে কোনো স্ক্রোলবার যেন না আসে */
+    overflow-x: hidden;
 }
 
 /* Navigation Header */
@@ -29,6 +29,7 @@ nav {
     padding: 10px 20px;
 }
 
+/* Text Logo & Sub-logo styling */
 .logo-container {
     display: flex;
     align-items: center;
@@ -37,20 +38,28 @@ nav {
 .logo-container a {
     cursor: pointer;
     display: flex;
-    align-items: center;
+    flex-direction: column; /* লেখার নিচে লেখা সাজানোর জন্য */
+    align-items: flex-start;
     text-decoration: none;
 }
 
-.nav-logo {
-    height: 65px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    transition: transform 0.3s ease;
+.text-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #52f3af;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
 }
 
-.nav-logo:hover {
-    transform: scale(1.04);
+.sub-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 2px; /* লেখাটিকে আকর্ষণীয় করার স্পেসিং */
+    opacity: 0.85;
+    margin-top: 2px;
 }
 
 .nav-links {
@@ -105,7 +114,6 @@ section.active {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* হেডার বাদ দিয়ে সম্পূর্ণ ভিউপোর্ট জুড়ে ছড়িয়ে যাওয়ার হিসাব */
     min-height: calc(100vh - 85px); 
     width: 100%;
     display: flex;
@@ -357,10 +365,6 @@ footer {
     nav {
         flex-direction: column;
         gap: 15px;
-    }
-
-    .nav-logo {
-        height: 50px;
     }
 
     .hero h1 {
