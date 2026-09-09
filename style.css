@@ -145,11 +145,11 @@ section.active {
     margin: 0 !important;
 }
 
-/* Home Hero Area */
+/* Home Hero Area with Local Image IMG_3702.jpg */
 .hero {
     text-align: center;
     padding: 20px;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.postimg.cc/j2YfmpVP/53145940818-70791fe6c3-o.jpg');
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/IMG_3702.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -301,7 +301,7 @@ section.active {
     background-color: #3ee29c;
 }
 
-/* Lightbox Modal (Updated for Large View Size) */
+/* Lightbox Modal (Large Scale View) */
 .modal {
     display: none; 
     position: fixed; 
@@ -319,7 +319,7 @@ section.active {
     margin: 0 auto;
     display: block;
     max-width: 95%;
-    max-height: 88vh; /* Large scale photo size */
+    max-height: 88vh;
     width: auto;
     height: auto;
     border-radius: 6px;
