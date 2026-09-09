@@ -57,12 +57,25 @@ nav {
 
 .sub-logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 300;
     color: #ffffff;
-    letter-spacing: 2.5px;
+    letter-spacing: 1.5px;
     opacity: 0.9;
     margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Signature style for "Munna" in Green */
+.signature-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.4rem;
+    color: #52f3af;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1;
 }
 
 /* Navigation Links & Instagram Container */
