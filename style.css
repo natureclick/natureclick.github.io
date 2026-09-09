@@ -88,25 +88,34 @@ section.active {
     display: block;
 }
 
-/* Home Section */
+/* Home Section Specifically Adjusted to Full Screen Under Header */
+#home {
+    padding: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Home Hero Area (Header-এর প্যাডিং বাদ দিয়ে পুরো স্ক্রিন জুড়ে ছবি) */
 .hero {
     text-align: center;
-    padding: 120px 20px;
+    padding: 20px;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.postimg.cc/j2YfmpVP/53145940818-70791fe6c3-o.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 80vh;
+    /* হেডার বাদ দিয়ে সম্পূর্ণ স্ক্রিন সাইজ হিসাব */
+    min-height: calc(100vh - 85px); 
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 0; /* ফুল স্ক্রিনের সাথে বর্ডার রাউন্ড বাদ দেওয়া হয়েছে */
 }
 
 .hero h1 {
     font-family: 'Cinzel', serif;
-    font-size: 3rem;
+    font-size: 3.2rem;
     margin-bottom: 15px;
     color: #ffffff;
 }
@@ -122,7 +131,7 @@ section.active {
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #ddd;
 }
 
@@ -332,7 +341,7 @@ footer {
     padding: 20px;
     background-color: #121816;
     color: #777;
-    margin-top: 40px;
+    margin-top: 0;
 }
 
 /* Mobile & Tablet Responsiveness */
@@ -350,6 +359,10 @@ footer {
 
     .nav-logo {
         height: 50px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
     }
 
     .gallery-grid {
