@@ -43,7 +43,6 @@ nav {
     text-decoration: none;
 }
 
-/* আগের অরিজিনাল Cinzel ফন্ট ও সবুজ (#52f3af) কালার */
 .text-logo {
     font-family: 'Cinzel', serif;
     font-size: 1.5rem;
@@ -52,7 +51,6 @@ nav {
     line-height: 1.1;
 }
 
-/* নিচে সাবটাইটেল হিসেবে ছোট সাদা ফন্টে By Munna */
 .sub-logo {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
@@ -61,6 +59,12 @@ nav {
     letter-spacing: 2px;
     opacity: 0.85;
     margin-top: 3px;
+}
+
+/* Navigation Links & Instagram Container */
+.nav-right {
+    display: flex;
+    align-items: center;
 }
 
 .nav-links {
@@ -84,6 +88,22 @@ nav {
 
 .nav-links a:hover, .nav-links a.active {
     color: #52f3af;
+}
+
+/* Instagram Link Styling */
+.nav-instagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    margin-left: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-instagram:hover {
+    color: #e1306c;
+    transform: scale(1.15);
 }
 
 /* Base Sections setup */
