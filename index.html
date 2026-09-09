@@ -1,26 +1,136 @@
-<!-- Navigation Header -->
-<header>
-    <nav>
-        <div class="logo-container">
-            <a onclick="showTab('home')">
-                <span class="text-logo">Nature Click</span>
-                <span class="sub-logo">By Munna</span>
-            </a>
-        </div>
-        <ul class="nav-links">
-            <li><a onclick="showTab('home')" class="nav-item active" id="nav-home">Home</a></li>
-            <li><a onclick="showTab('photography')" class="nav-item" id="nav-photography">Photography</a></li>
-            <li><a onclick="showTab('about')" class="nav-item" id="nav-about">About Me</a></li>
-            <li><a onclick="showTab('contact')" class="nav-item" id="nav-contact">Contact Me</a></li>
-        </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Click - Portfolio</title>
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        <!-- Instagram Icon Link -->
-        <a href="https://www.instagram.com/natureklick" target="_blank" rel="noopener noreferrer" class="nav-instagram" title="Follow on Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-        </a>
-    </nav>
-</header>
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a onclick="showTab('home')">
+                    <span class="text-logo">Nature Click</span>
+                    <span class="sub-logo">By Munna</span>
+                </a>
+            </div>
+
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a onclick="showTab('home')" class="nav-item active" id="nav-home">Home</a></li>
+                    <li><a onclick="showTab('photography')" class="nav-item" id="nav-photography">Photography</a></li>
+                    <li><a onclick="showTab('about')" class="nav-item" id="nav-about">About Me</a></li>
+                    <li><a onclick="showTab('contact')" class="nav-item" id="nav-contact">Contact Me</a></li>
+                </ul>
+
+                <!-- Instagram Icon Link -->
+                <a href="https://www.instagram.com/natureklick" target="_blank" rel="noopener noreferrer" class="nav-instagram" title="Follow on Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 1. HOME SECTION -->
+    <section id="home" class="active">
+        <div class="hero">
+            <h1>Welcome to <span class="flag-text">Nature Click</span></h1>
+            <p>Capturing raw and unscripted moments through my lens</p>
+        </div>
+    </section>
+
+    <!-- 2. PHOTOGRAPHY SECTION -->
+    <section id="photography">
+        <div class="category-buttons">
+            <button class="cat-btn active" id="btn-mountain" onclick="filterGallery('mountain', event)">Mountain</button>
+            <button class="cat-btn" id="btn-animal" onclick="filterGallery('animal', event)">Animals</button>
+            <button class="cat-btn" id="btn-bird" onclick="filterGallery('bird', event)">Birds</button>
+            <button class="cat-btn" id="btn-flower" onclick="filterGallery('flower', event)">Flowers</button>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Mountain Photos -->
+            <div class="photo-card mountain">
+                <img src="https://picsum.photos/600/400?random=1" alt="Himalayan Peak" data-id="himalayan-peak" data-location="Himalayas, India" data-description="A breathtaking sunset over the snow-capped Himalayan peaks." onclick="openModal(this)">
+                <div class="photo-info"><h3>Himalayan Peak</h3></div>
+            </div>
+            <div class="photo-card mountain">
+                <img src="https://picsum.photos/600/400?random=2" alt="Green Valley" data-id="green-valley" data-location="Kashmir, India" data-description="Lush green mountain valley surrounded by soft morning clouds." onclick="openModal(this)">
+                <div class="photo-info"><h3>Green Valley</h3></div>
+            </div>
+
+            <!-- Animal Photos -->
+            <div class="photo-card animal">
+                <img src="images/IMG_3751-Enhanced-SR.jpg" alt="The Silent Visitor of the Forest" data-id="the-silent-visitor-of-the-forest" data-location="Assam, India" data-description="Deep within the lush forests of Assam, a wild Asian elephant quietly arrived at the water's edge to drink. Captured from a distance, this photograph preserves a beautiful and completely natural moment in the wilderness. Surrounded by dense greenery, calm water, and the untouched beauty of the forest, the elephant's peaceful presence reflects the raw and timeless rhythm of nature. No staged scene—just a fleeting encounter between a wildlife photographer and one of India's magnificent wild creatures." onclick="openModal(this)">
+                <div class="photo-info"><h3>The Silent Visitor of the Forest</h3></div>
+            </div>
+            <div class="photo-card animal">
+                <img src="images/20240421154719_IMG_3515.jpg" alt="A Mysterious Snake on the Tawang Road." data-id="a-mysterious-snake-on-the-tawang-road" data-location="Tawang, Arunachal Pradesh, India." data-description="While travelling through the scenic mountain roads of Tawang, Arunachal Pradesh, I came across this mysterious brown snake (Possibly Venomous) resting on the road. The photograph was captured from a safe distance, preserving a fascinating moment of wildlife in the Eastern Himalayas. Surrounded by the rugged landscape and quiet mountain roads, the snake seemed completely undisturbed by its surroundings. Encounters like this remind us that the roads through Arunachal Pradesh are not just journeys through spectacular landscapes—they also pass through the natural habitats of countless wild species." onclick="openModal(this)">
+                <div class="photo-info"><h3>A Mysterious Snake on the Tawang Road.</h3></div>
+            </div>
+
+            <!-- Bird Photos -->
+            <div class="photo-card bird">
+                <img src="images/IMG_4179.jpg" alt="Flying Asian Openbill." data-id="flying-asian-openbill" data-location="Duttapukur, West Bengal, India." data-description="Captured on a cloudy day over an open field in Duttapukur, West Bengal, this Asian Openbill glides gracefully across the deep blue-grey sky. With its long neck, distinctive bill, broad wings and contrasting black-and-white plumage, the bird creates a striking silhouette against the vast open sky. The simplicity of the scene—the flying stork, the cloudy atmosphere and the endless sky—captures a quiet moment of freedom in nature." onclick="openModal(this)">
+                <div class="photo-info"><h3>Flying Asian Openbill.</h3></div>
+            </div>
+            <div class="photo-card bird">
+                <img src="https://picsum.photos/600/400?random=5" alt="Kingfisher" data-id="kingfisher" data-location="Sundarbans, India" data-description="A colorful kingfisher captured right before diving for a catch." onclick="openModal(this)">
+                <div class="photo-info"><h3>Kingfisher</h3></div>
+            </div>
+
+            <!-- Flower Photos -->
+            <div class="photo-card flower">
+                <img src="https://i.postimg.cc/nLZPHdyJ/IMG-4107-Enhanced-SR.jpg" alt="A Little Bloom in the Wild" data-id="a-little-bloom-in-the-wild" data-location="Forest Floor, India" data-description="A delicate daisy blooming quietly on the forest floor, surrounded by deep shadows, fallen leaves and wild greenery. Its bright white petals and golden-yellow center stand out beautifully against the dark, moody background—capturing the quiet charm and untouched beauty of nature." onclick="openModal(this)">
+                <div class="photo-info"><h3>A Little Bloom in the Wild</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ABOUT SECTION -->
+    <section id="about">
+        <div class="about-content">
+            <h2>About <span style="color: #52f3af; font-weight: bold;">Nature Click</span></h2>
+            <p>Hello! Welcome to <span style="color: #52f3af; font-weight: bold;">Nature Click</span>. I am a passionate photographer who loves capturing nature, wildlife, and candid moments that happen spontaneously.</p>
+            <p>I believe the best photographs are often unplanned and unfiltered. Here, I showcase some of my favorite memories captured through my camera lens.</p>
+        </div>
+    </section>
+
+    <!-- 4. CONTACT SECTION -->
+    <section id="contact">
+        <div class="contact-content">
+            <h2>Get In Touch</h2>
+            <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Write your message or booking inquiry..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nature Click | All Rights Reserved</p>
+    </footer>
+
+    <!-- Fullscreen Image Modal Structure -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="fullImg">
+        <div id="caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
