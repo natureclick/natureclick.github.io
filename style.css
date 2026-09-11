@@ -55,7 +55,6 @@ nav {
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8));
 }
 
-/* Green Color for "By Munna" Sub-logo */
 .sub-logo {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem !important;
@@ -69,7 +68,6 @@ nav {
     gap: 4px;
 }
 
-/* Chiller / Creepster Font for "Munna" - Normal Weight */
 .signature-text {
     font-family: 'Creepster', 'Chiller', cursive, sans-serif !important;
     font-size: 0.95rem !important;
@@ -108,7 +106,6 @@ nav {
     color: #52f3af;
 }
 
-/* Instagram Link Styling */
 .nav-instagram {
     display: flex;
     align-items: center;
@@ -127,17 +124,16 @@ nav {
 /* Base Sections setup */
 section {
     display: none;
-    padding: 60px 20px;
+    padding: 30px 20px;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 80vh;
+    min-height: calc(100vh - 120px);
 }
 
 section.active {
     display: block;
 }
 
-/* Home Section Override to Cover Full Screen Width */
 #home {
     padding: 0 !important;
     max-width: 100% !important;
@@ -145,7 +141,6 @@ section.active {
     margin: 0 !important;
 }
 
-/* Home Hero Area with Local Image IMG_3702.jpg */
 .hero {
     text-align: center;
     padding: 20px;
@@ -169,7 +164,6 @@ section.active {
     color: #ffffff;
 }
 
-/* Indian Flag Gradient Effect for Nature Click */
 .flag-text {
     font-weight: 800;
     background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
@@ -184,7 +178,6 @@ section.active {
     color: #ddd;
 }
 
-/* Photography Categories & Filters */
 .category-buttons {
     display: flex;
     justify-content: center;
@@ -210,7 +203,6 @@ section.active {
     font-weight: 600;
 }
 
-/* Gallery Grid */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -248,8 +240,47 @@ section.active {
     color: #eee;
 }
 
-/* About & Contact Form */
-.about-content, .contact-content {
+/* Landscape Optimized About Section (No-Scroll View for Desktops) */
+.about-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #161e1b;
+    padding: 25px 35px;
+    border-radius: 10px;
+    border: 1px solid #23312c;
+}
+
+.about-content h2 {
+    font-family: 'Cinzel', serif;
+    color: #52f3af;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+}
+
+.about-content p {
+    line-height: 1.55;
+    color: #ccc;
+    font-size: 0.91rem;
+    margin-bottom: 0;
+}
+
+.about-footer-text {
+    grid-column: span 2;
+    margin-top: 10px !important;
+    text-align: center;
+    font-weight: 500;
+    color: #52f3af;
+}
+
+/* Contact Form */
+.contact-content {
     max-width: 700px;
     margin: 0 auto;
     background-color: #161e1b;
@@ -258,17 +289,11 @@ section.active {
     border: 1px solid #23312c;
 }
 
-.about-content h2, .contact-content h2 {
+.contact-content h2 {
     font-family: 'Cinzel', serif;
     color: #52f3af;
     margin-bottom: 20px;
     text-align: center;
-}
-
-.about-content p {
-    line-height: 1.8;
-    color: #ccc;
-    margin-bottom: 15px;
 }
 
 .contact-form {
@@ -301,7 +326,7 @@ section.active {
     background-color: #3ee29c;
 }
 
-/* Lightbox Modal (Large Scale View) */
+/* Lightbox Modal */
 .modal {
     display: none; 
     position: fixed; 
@@ -389,7 +414,7 @@ section.active {
 /* Footer */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 15px;
     background-color: #121816;
     color: #777;
     margin-top: 0;
@@ -399,6 +424,12 @@ footer {
 @media screen and (max-width: 1024px) {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    .about-footer-text {
+        grid-column: span 1;
     }
 }
 
