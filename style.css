@@ -240,7 +240,7 @@ section.active {
     color: #eee;
 }
 
-/* Landscape Optimized About Section (No-Scroll View for Desktops) */
+/* Landscape Optimized About Section (No-Scroll View) */
 .about-content {
     max-width: 1100px;
     margin: 0 auto;
@@ -261,7 +261,7 @@ section.active {
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px 30px;
+    gap: 15px 30px;
 }
 
 .about-content p {
@@ -271,12 +271,46 @@ section.active {
     margin-bottom: 0;
 }
 
-.about-footer-text {
+/* Unique Styled Footer Boxes in About Section */
+.about-feedback {
     grid-column: span 2;
-    margin-top: 10px !important;
+    margin-top: 10px;
+    padding: 12px 18px;
+    background: rgba(82, 243, 175, 0.04);
+    border-left: 3px solid #ff9933;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.92rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+}
+
+.about-thanks {
+    grid-column: span 2;
+    margin-top: 10px;
     text-align: center;
-    font-weight: 500;
+    padding: 14px;
+    background: linear-gradient(135deg, rgba(255,153,51,0.08), rgba(82,243,175,0.08));
+    border-radius: 8px;
+    border: 1px dashed rgba(82, 243, 175, 0.4);
+}
+
+.thanks-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff9933;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.thanks-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-style: italic;
     color: #52f3af;
+    letter-spacing: 0.5px;
 }
 
 /* Contact Form */
@@ -428,7 +462,7 @@ footer {
     .about-grid {
         grid-template-columns: 1fr;
     }
-    .about-footer-text {
+    .about-feedback, .about-thanks {
         grid-column: span 1;
     }
 }
