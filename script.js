@@ -1,27 +1,37 @@
-let currentImgIndex = 0;
-let visibleImages = [];
-
-// Tab switching logic
+// Function to switch between main tabs (Home, Photography, About, Contact)
 function showTab(tabId) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => sec.classList.remove('active'));
 
-    const targetSection = document.getElementById(tabId);
-    const targetNav = document.getElementById('nav-' + tabId);
+    const activeSection = document.getElementById(tabId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
 
-    if (targetSection) targetSection.classList.add('active');
-    if (targetNav) targetNav.classList.add('active');
-    
-    // Auto filter to first category when switching to Photography tab
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => item.classList.remove('active'));
+
+    const activeNav = document.getElementById('nav-' + tabId);
+    if (activeNav) {
+        activeNav.classList.add('active');
+    }
+
+    // Default filter activation when clicking Photography tab
     if (tabId === 'photography') {
         const mountainBtn = document.getElementById('btn-mountain');
-        if (mountainBtn) mountainBtn.click();
+        if (mountainBtn) {
+            filterGallery('mountain', { target: mountainBtn });
+        }
     }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Category Filtering logic
+// Function to filter photography categories (Mountain, Animals, Birds, Flowers)
 function filterGallery(category, event) {
-    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+    const buttons = document.querySelectorAll('.cat-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
     if (event && event.target) {
         event.target.classList.add('active');
     }
@@ -36,67 +46,43 @@ function filterGallery(category, event) {
     });
 }
 
-// Modal Open Logic
+// Fullscreen Lightbox Modal Functions
 function openModal(imgElement) {
-    const modal = document.getElementById("imageModal");
-    
-    // Get visible images based on active category
-    visibleImages = Array.from(document.querySelectorAll('.photo-card'))
-        .filter(card => getComputedStyle(card).display !== 'none')
-        .map(card => card.querySelector('img'));
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('fullImg');
+    const captionText = document.getElementById('caption');
 
-    currentImgIndex = visibleImages.indexOf(imgElement);
-    if (currentImgIndex === -1) currentImgIndex = 0;
+    const title = imgElement.getAttribute('alt') || '';
+    const location = imgElement.getAttribute('data-location') || '';
+    const desc = imgElement.getAttribute('data-description') || '';
 
-    updateModalData(imgElement);
-    modal.classList.add('show');
-}
-
-// Update Modal Data
-function updateModalData(imgElement) {
-    if (!imgElement) return;
-
-    const modalImg = document.getElementById("fullImg");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalLocation = document.getElementById("modalLocation");
-    const modalDesc = document.getElementById("modalDesc");
-
+    modal.style.display = 'block';
     modalImg.src = imgElement.src;
-    modalTitle.innerText = imgElement.alt || "Nature Click Photography";
-    modalLocation.innerText = imgElement.getAttribute("data-location") || "Nature";
-    modalDesc.innerText = imgElement.getAttribute("data-description") || "";
+
+    captionText.innerHTML = `
+        <span class="modal-title">${title}</span>
+        ${location ? `<span class="modal-location">📍 ${location}</span>` : ''}
+        ${desc ? `<span class="modal-desc">${desc}</span>` : ''}
+    `;
+    
+    document.body.style.overflow = 'hidden';
 }
 
-// Prev/Next Navigation
-function changeImage(direction) {
-    if (visibleImages.length === 0) return;
-    
-    currentImgIndex += direction;
-    if (currentImgIndex < 0) {
-        currentImgIndex = visibleImages.length - 1;
-    } else if (currentImgIndex >= visibleImages.length) {
-        currentImgIndex = 0;
-    }
-    
-    updateModalData(visibleImages[currentImgIndex]);
-}
-
-// Modal Close
 function closeModal() {
-    const modal = document.getElementById("imageModal");
-    modal.classList.remove('show');
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
-// Close when clicking outside content area
+// Close Modal when clicking outside the image
 window.onclick = function(event) {
-    const modal = document.getElementById("imageModal");
+    const modal = document.getElementById('imageModal');
     if (event.target === modal) {
         closeModal();
     }
-}
+};
 
-// Initial setup on page load
+// Default setup on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Show mountain category by default
-    filterGallery('mountain');
+    showTab('home');
 });
