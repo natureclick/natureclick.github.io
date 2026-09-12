@@ -1,92 +1,119 @@
-// Tab Switcher (Home, Photography, About, Contact)
+let currentPhotoIndex = 0;
+let visiblePhotos = [];
+
+// Navigation tab logic
 function showTab(tabId) {
-    // Hide all sections
     const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
-
-    // Remove active class from all nav items
     const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.classList.remove('active');
-    });
 
-    // Show target section
-    const targetSection = document.getElementById(tabId);
-    if (targetSection) {
-        targetSection.classList.add('active');
+    sections.forEach(sec => sec.classList.remove('active'));
+    navItems.forEach(item => item.classList.remove('active'));
+
+    const activeSection = document.getElementById(tabId);
+    if (activeSection) {
+        activeSection.classList.add('active');
     }
 
-    // Set active nav link
-    const targetNav = document.getElementById('nav-' + tabId);
-    if (targetNav) {
-        targetNav.classList.add('active');
+    const activeNav = document.getElementById('nav-' + tabId);
+    if (activeNav) {
+        activeNav.classList.add('active');
     }
 
-    // If photography tab clicked, default to mountain category
+    // Default category trigger on entering Photography tab
     if (tabId === 'photography') {
         const mountainBtn = document.getElementById('btn-mountain');
-        if (mountainBtn) {
-            filterGallery('mountain', { target: mountainBtn });
-        }
+        if (mountainBtn) mountainBtn.click();
     }
-
-    // Scroll back to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Gallery Filter Functionality
+// Photography filter function
 function filterGallery(category, event) {
-    const cards = document.querySelectorAll('.photo-card');
-    cards.forEach(card => {
+    const photoCards = document.querySelectorAll('.photo-card');
+    const catButtons = document.querySelectorAll('.cat-btn');
+
+    catButtons.forEach(btn => btn.classList.remove('active'));
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
+
+    photoCards.forEach(card => {
         if (card.classList.contains(category)) {
             card.style.display = 'block';
         } else {
             card.style.display = 'none';
         }
     });
+}
 
-    // Update active class on category buttons
-    const catButtons = document.querySelectorAll('.cat-btn');
-    catButtons.forEach(btn => {
-        btn.classList.remove('active');
-    });
+// Modal open function
+function openModal(imgElement) {
+    const activeSection = document.querySelector('section.active');
+    const photoCards = Array.from(activeSection.querySelectorAll('.photo-card'));
+    
+    visiblePhotos = photoCards.filter(card => card.style.display !== 'none')
+                              .map(card => card.querySelector('img'));
 
-    if (event && event.target) {
-        event.target.classList.add('active');
+    currentPhotoIndex = visiblePhotos.indexOf(imgElement);
+
+    if (currentPhotoIndex !== -1) {
+        updateModalContent(visiblePhotos[currentPhotoIndex]);
+        document.getElementById('imageModal').classList.add('active-modal');
     }
 }
 
-// Lightbox Modal Functions
-function openModal(imgElement) {
-    const modal = document.getElementById('imageModal');
+// Update modal details
+function updateModalContent(img) {
     const modalImg = document.getElementById('fullImg');
-    const captionText = document.getElementById('caption');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalLocation = document.getElementById('modalLocation');
+    const locationRow = document.getElementById('locationRow');
+    const modalAltitude = document.getElementById('modalAltitude');
+    const altitudeRow = document.getElementById('altitudeRow');
+    const modalDesc = document.getElementById('modalDesc');
 
-    const title = imgElement.alt || '';
-    const location = imgElement.getAttribute('data-location') || '';
-    const description = imgElement.getAttribute('data-description') || '';
+    modalImg.src = img.src;
+    modalTitle.innerText = img.getAttribute('alt') || 'Untitled';
 
-    modal.style.display = 'block';
-    modalImg.src = imgElement.src;
+    const loc = img.getAttribute('data-location');
+    if (loc) {
+        modalLocation.innerText = loc;
+        locationRow.style.display = 'flex';
+    } else {
+        locationRow.style.display = 'none';
+    }
 
-    captionText.innerHTML = `
-        <span class="modal-title">${title}</span>
-        <span class="modal-location">📍 ${location}</span>
-        <p class="modal-desc">${description}</p>
-    `;
-    
-    document.body.style.overflow = 'hidden'; // Stop background scrolling
+    const alt = img.getAttribute('data-altitude');
+    if (alt) {
+        modalAltitude.innerText = alt;
+        altitudeRow.style.display = 'flex';
+    } else {
+        altitudeRow.style.display = 'none';
+    }
+
+    modalDesc.innerText = img.getAttribute('data-description') || '';
 }
 
+// Photo slider logic inside modal
+function changePhoto(direction) {
+    if (visiblePhotos.length === 0) return;
+
+    currentPhotoIndex += direction;
+
+    if (currentPhotoIndex >= visiblePhotos.length) {
+        currentPhotoIndex = 0;
+    } else if (currentPhotoIndex < 0) {
+        currentPhotoIndex = visiblePhotos.length - 1;
+    }
+
+    updateModalContent(visiblePhotos[currentPhotoIndex]);
+}
+
+// Close Modal
 function closeModal() {
-    const modal = document.getElementById('imageModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable background scrolling
+    document.getElementById('imageModal').classList.remove('active-modal');
 }
 
-// Close modal when pressing Esc key or clicking outside image
+// Close on clicking outer overlay
 window.onclick = function(event) {
     const modal = document.getElementById('imageModal');
     if (event.target === modal) {
@@ -94,13 +121,12 @@ window.onclick = function(event) {
     }
 };
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeModal();
+// Keyboard controls (Esc to close, Left/Right arrows to scroll photos)
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('imageModal');
+    if (modal && modal.classList.contains('active-modal')) {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') changePhoto(-1);
+        if (e.key === 'ArrowRight') changePhoto(1);
     }
-});
-
-// Initialize default tab on page load
-document.addEventListener('DOMContentLoaded', () => {
-    filterGallery('mountain', { target: document.getElementById('btn-mountain') });
 });
