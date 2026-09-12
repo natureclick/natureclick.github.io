@@ -1,7 +1,7 @@
 let currentPhotoIndex = 0;
 let visiblePhotos = [];
 
-// Navigation tab logic
+// Tab Navigation Logic
 function showTab(tabId) {
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-item');
@@ -19,14 +19,13 @@ function showTab(tabId) {
         activeNav.classList.add('active');
     }
 
-    // Default category trigger on entering Photography tab
     if (tabId === 'photography') {
         const mountainBtn = document.getElementById('btn-mountain');
         if (mountainBtn) mountainBtn.click();
     }
 }
 
-// Photography filter function
+// Category Filter
 function filterGallery(category, event) {
     const photoCards = document.querySelectorAll('.photo-card');
     const catButtons = document.querySelectorAll('.cat-btn');
@@ -45,7 +44,7 @@ function filterGallery(category, event) {
     });
 }
 
-// Modal open function
+// Open Modal
 function openModal(imgElement) {
     const activeSection = document.querySelector('section.active');
     const photoCards = Array.from(activeSection.querySelectorAll('.photo-card'));
@@ -61,7 +60,7 @@ function openModal(imgElement) {
     }
 }
 
-// Update modal details
+// Update Modal Data
 function updateModalContent(img) {
     const modalImg = document.getElementById('fullImg');
     const modalTitle = document.getElementById('modalTitle');
@@ -91,9 +90,13 @@ function updateModalContent(img) {
     }
 
     modalDesc.innerText = img.getAttribute('data-description') || '';
+
+    // Scroll description to top when changing photo
+    const scrollArea = document.querySelector('.desc-scroll-area');
+    if (scrollArea) scrollArea.scrollTop = 0;
 }
 
-// Photo slider logic inside modal
+// Navigation between photos
 function changePhoto(direction) {
     if (visiblePhotos.length === 0) return;
 
@@ -113,7 +116,7 @@ function closeModal() {
     document.getElementById('imageModal').classList.remove('active-modal');
 }
 
-// Close on clicking outer overlay
+// Close when clicking background
 window.onclick = function(event) {
     const modal = document.getElementById('imageModal');
     if (event.target === modal) {
@@ -121,7 +124,7 @@ window.onclick = function(event) {
     }
 };
 
-// Keyboard controls (Esc to close, Left/Right arrows to scroll photos)
+// Keyboard controls (Esc, Left/Right arrows)
 document.addEventListener('keydown', function(e) {
     const modal = document.getElementById('imageModal');
     if (modal && modal.classList.contains('active-modal')) {
