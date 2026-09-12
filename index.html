@@ -133,46 +133,18 @@
         <p>&copy; 2026 Nature Click | All Rights Reserved</p>
     </footer>
 
-    <!-- Fullscreen Modal View -->
-    <div id="imageModal" class="modal">
-        <div class="modal-box">
-            <span class="close-btn-top" onclick="closeModal()">&times;</span>
-            
-            <div class="modal-body">
-                <!-- Left Side: Large Image Display -->
-                <div class="modal-img-container">
-                    <button class="nav-arrow prev-arrow" onclick="changePhoto(-1)">&#10094;</button>
-                    <img class="modal-content" id="fullImg" src="" alt="Popup Image">
-                    <button class="nav-arrow next-arrow" onclick="changePhoto(1)">&#10095;</button>
-                </div>
-
-                <!-- Right Side: Details & Description -->
-                <div class="modal-info-container">
-                    <h2 id="modalTitle"></h2>
-                    
-                    <div class="meta-item" id="locationRow">
-                        <span class="meta-icon">📍</span>
-                        <span id="modalLocation"></span>
-                    </div>
-
-                    <div class="meta-item" id="altitudeRow">
-                        <span class="meta-icon">🏔️</span>
-                        <span id="modalAltitude"></span>
-                    </div>
-
-                    <div class="desc-scroll-area">
-                        <p id="modalDesc"></p>
-                    </div>
-
-                    <div class="modal-buttons">
-                        <button class="btn-nav" onclick="changePhoto(-1)">&larr; Previous</button>
-                        <button class="btn-nav" onclick="changePhoto(1)">Next &rarr;</button>
-                    </div>
-
-                    <button class="btn-close-bottom" onclick="closeModal()">Close &times;</button>
-                </div>
-            </div>
+    <!-- Fullscreen Image Modal (Original Simple View) -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-btn">&times;</span>
+        <button class="modal-nav modal-prev" onclick="changePhoto(-1, event)">&#10094;</button>
+        <div class="modal-content-container" onclick="event.stopPropagation()">
+            <img class="modal-content" id="fullImg">
+            <div id="caption"></div>
+            <div id="location"></div>
+            <div id="altitude"></div>
+            <div id="description"></div>
         </div>
+        <button class="modal-nav modal-next" onclick="changePhoto(1, event)">&#10095;</button>
     </div>
 
     <script src="script.js"></script>
