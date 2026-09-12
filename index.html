@@ -133,11 +133,36 @@
         <p>&copy; 2026 Nature Click | All Rights Reserved</p>
     </footer>
 
-    <!-- Fullscreen Image Modal Structure -->
+    <!-- Fullscreen Image Modal Structure (Side-by-Side Card View) -->
     <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="fullImg">
-        <div id="caption"></div>
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-image-container">
+                <button class="modal-arrow prev-arrow" onclick="changeImage(-1)">&lsaquo;</button>
+                <img class="modal-content" id="fullImg" src="" alt="Preview">
+                <button class="modal-arrow next-arrow" onclick="changeImage(1)">&rsaquo;</button>
+            </div>
+            
+            <div class="modal-info-container">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                
+                <div id="modalLocationWrapper" class="modal-meta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#52f3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span id="modalLocation"></span>
+                </div>
+                
+                <div class="modal-desc-wrapper">
+                    <p id="modalDesc" class="modal-desc"></p>
+                </div>
+                
+                <div class="modal-action-btns">
+                    <button class="modal-btn" onclick="changeImage(-1)">&larr; Previous</button>
+                    <button class="modal-btn" onclick="changeImage(1)">Next &rarr;</button>
+                </div>
+                <button class="modal-close-bottom" onclick="closeModal()">Close &times;</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
