@@ -1,41 +1,20 @@
-let currentPhotoIndex = 0;
-let visiblePhotos = [];
+let currentImgIndex = 0;
+let visibleImages = [];
 
-// Tab Navigation
 function showTab(tabId) {
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-item');
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
 
-    sections.forEach(sec => sec.classList.remove('active'));
-    navItems.forEach(item => item.classList.remove('active'));
-
-    const activeSection = document.getElementById(tabId);
-    if (activeSection) {
-        activeSection.classList.add('active');
-    }
-
-    const activeNav = document.getElementById('nav-' + tabId);
-    if (activeNav) {
-        activeNav.classList.add('active');
-    }
-
-    if (tabId === 'photography') {
-        const mountainBtn = document.getElementById('btn-mountain');
-        if (mountainBtn) mountainBtn.click();
-    }
+    document.getElementById(tabId).classList.add('active');
+    document.getElementById('nav-' + tabId).classList.add('active');
 }
 
-// Category Filter
 function filterGallery(category, event) {
-    const photoCards = document.querySelectorAll('.photo-card');
-    const catButtons = document.querySelectorAll('.cat-btn');
+    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
 
-    catButtons.forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) {
-        event.target.classList.add('active');
-    }
-
-    photoCards.forEach(card => {
+    const cards = document.querySelectorAll('.photo-card');
+    cards.forEach(card => {
         if (card.classList.contains(category)) {
             card.style.display = 'block';
         } else {
@@ -44,70 +23,57 @@ function filterGallery(category, event) {
     });
 }
 
-// Open Modal
 function openModal(imgElement) {
-    const activeSection = document.querySelector('section.active');
-    const photoCards = Array.from(activeSection.querySelectorAll('.photo-card'));
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("fullImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalLocation = document.getElementById("modalLocation");
+    const modalDesc = document.getElementById("modalDesc");
+
+    // Get current visible gallery images
+    visibleImages = Array.from(document.querySelectorAll('.photo-card'))
+        .filter(card => card.style.display !== 'none')
+        .map(card => card.querySelector('img'));
+
+    currentImgIndex = visibleImages.indexOf(imgElement);
+
+    updateModalData(imgElement);
+    modal.style.display = "flex";
+}
+
+function updateModalData(imgElement) {
+    const modalImg = document.getElementById("fullImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalLocation = document.getElementById("modalLocation");
+    const modalDesc = document.getElementById("modalDesc");
+
+    modalImg.src = imgElement.src;
+    modalTitle.innerText = imgElement.alt || "Nature Click Photography";
+    modalLocation.innerText = imgElement.getAttribute("data-location") || "Nature";
+    modalDesc.innerText = imgElement.getAttribute("data-description") || "";
+}
+
+function changeImage(direction) {
+    if (visibleImages.length === 0) return;
     
-    visiblePhotos = photoCards.filter(card => card.style.display !== 'none')
-                              .map(card => card.querySelector('img'));
-
-    currentPhotoIndex = visiblePhotos.indexOf(imgElement);
-
-    if (currentPhotoIndex !== -1) {
-        updateModalContent(visiblePhotos[currentPhotoIndex]);
-        document.getElementById('imageModal').style.display = 'flex';
+    currentImgIndex += direction;
+    if (currentImgIndex < 0) {
+        currentImgIndex = visibleImages.length - 1;
+    } else if (currentImgIndex >= visibleImages.length) {
+        currentImgIndex = 0;
     }
-}
-
-// Update Modal Data
-function updateModalContent(img) {
-    const modalImg = document.getElementById('fullImg');
-    const captionText = document.getElementById('caption');
-    const locationText = document.getElementById('location');
-    const altitudeText = document.getElementById('altitude');
-    const descText = document.getElementById('description');
-
-    modalImg.src = img.src;
-    captionText.innerText = img.getAttribute('alt') || '';
     
-    const loc = img.getAttribute('data-location');
-    locationText.innerText = loc ? '📍 ' + loc : '';
-
-    const alt = img.getAttribute('data-altitude');
-    altitudeText.innerText = alt ? '🏔️ ' + alt : '';
-
-    descText.innerText = img.getAttribute('data-description') || '';
+    updateModalData(visibleImages[currentImgIndex]);
 }
 
-// Slider Controls
-function changePhoto(direction, event) {
-    if (event) event.stopPropagation();
-
-    if (visiblePhotos.length === 0) return;
-
-    currentPhotoIndex += direction;
-
-    if (currentPhotoIndex >= visiblePhotos.length) {
-        currentPhotoIndex = 0;
-    } else if (currentPhotoIndex < 0) {
-        currentPhotoIndex = visiblePhotos.length - 1;
-    }
-
-    updateModalContent(visiblePhotos[currentPhotoIndex]);
-}
-
-// Close Modal
 function closeModal() {
-    document.getElementById('imageModal').style.display = 'none';
+    document.getElementById("imageModal").style.display = "none";
 }
 
-// Keyboard controls (Esc, Left/Right arrows)
-document.addEventListener('keydown', function(e) {
-    const modal = document.getElementById('imageModal');
-    if (modal && modal.style.display === 'flex') {
-        if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft') changePhoto(-1);
-        if (e.key === 'ArrowRight') changePhoto(1);
+// Close Modal when clicking outside card
+window.onclick = function(event) {
+    const modal = document.getElementById("imageModal");
+    if (event.target === modal) {
+        closeModal();
     }
-});
+}
