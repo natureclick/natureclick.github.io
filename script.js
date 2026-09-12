@@ -1,7 +1,7 @@
 let currentPhotoIndex = 0;
 let visiblePhotos = [];
 
-// Tab Navigation Logic
+// Tab Navigation
 function showTab(tabId) {
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-item');
@@ -56,48 +56,34 @@ function openModal(imgElement) {
 
     if (currentPhotoIndex !== -1) {
         updateModalContent(visiblePhotos[currentPhotoIndex]);
-        document.getElementById('imageModal').classList.add('active-modal');
+        document.getElementById('imageModal').style.display = 'flex';
     }
 }
 
 // Update Modal Data
 function updateModalContent(img) {
     const modalImg = document.getElementById('fullImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalLocation = document.getElementById('modalLocation');
-    const locationRow = document.getElementById('locationRow');
-    const modalAltitude = document.getElementById('modalAltitude');
-    const altitudeRow = document.getElementById('altitudeRow');
-    const modalDesc = document.getElementById('modalDesc');
+    const captionText = document.getElementById('caption');
+    const locationText = document.getElementById('location');
+    const altitudeText = document.getElementById('altitude');
+    const descText = document.getElementById('description');
 
     modalImg.src = img.src;
-    modalTitle.innerText = img.getAttribute('alt') || 'Untitled';
-
+    captionText.innerText = img.getAttribute('alt') || '';
+    
     const loc = img.getAttribute('data-location');
-    if (loc) {
-        modalLocation.innerText = loc;
-        locationRow.style.display = 'flex';
-    } else {
-        locationRow.style.display = 'none';
-    }
+    locationText.innerText = loc ? '📍 ' + loc : '';
 
     const alt = img.getAttribute('data-altitude');
-    if (alt) {
-        modalAltitude.innerText = alt;
-        altitudeRow.style.display = 'flex';
-    } else {
-        altitudeRow.style.display = 'none';
-    }
+    altitudeText.innerText = alt ? '🏔️ ' + alt : '';
 
-    modalDesc.innerText = img.getAttribute('data-description') || '';
-
-    // Scroll description to top when changing photo
-    const scrollArea = document.querySelector('.desc-scroll-area');
-    if (scrollArea) scrollArea.scrollTop = 0;
+    descText.innerText = img.getAttribute('data-description') || '';
 }
 
-// Navigation between photos
-function changePhoto(direction) {
+// Slider Controls
+function changePhoto(direction, event) {
+    if (event) event.stopPropagation();
+
     if (visiblePhotos.length === 0) return;
 
     currentPhotoIndex += direction;
@@ -113,21 +99,13 @@ function changePhoto(direction) {
 
 // Close Modal
 function closeModal() {
-    document.getElementById('imageModal').classList.remove('active-modal');
+    document.getElementById('imageModal').style.display = 'none';
 }
-
-// Close when clicking background
-window.onclick = function(event) {
-    const modal = document.getElementById('imageModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-};
 
 // Keyboard controls (Esc, Left/Right arrows)
 document.addEventListener('keydown', function(e) {
     const modal = document.getElementById('imageModal');
-    if (modal && modal.classList.contains('active-modal')) {
+    if (modal && modal.style.display === 'flex') {
         if (e.key === 'Escape') closeModal();
         if (e.key === 'ArrowLeft') changePhoto(-1);
         if (e.key === 'ArrowRight') changePhoto(1);
