@@ -1,5 +1,5 @@
-// Tab Switching System
-function showTab(tabId) {
+// Tab Switching System with Dynamic URL Routing
+function showTab(tabId, updateHash = true) {
     const sections = document.querySelectorAll('section');
     sections.forEach(sec => sec.classList.remove('active'));
 
@@ -14,6 +14,15 @@ function showTab(tabId) {
     const activeNav = document.getElementById('nav-' + tabId);
     if (activeNav) {
         activeNav.classList.add('active');
+    }
+
+    // Update URL hash when clicking navigation tabs
+    if (updateHash) {
+        if (tabId === 'home') {
+            history.pushState("", document.title, window.location.pathname);
+        } else {
+            window.location.hash = tabId;
+        }
     }
 
     if (tabId === 'photography') {
@@ -45,7 +54,7 @@ function filterGallery(category, event) {
     });
 }
 
-// Image Modal System (With URL Update)
+// Image Modal System with Unique URL
 function openModal(imgElement) {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('fullImg');
@@ -78,8 +87,8 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 
-    // Reset URL Hash when closing modal
-    history.pushState("", document.title, window.location.pathname + window.location.search);
+    // Reset URL Hash back to Photography tab when modal is closed
+    window.location.hash = 'photography';
 }
 
 // Close Modal on Outside Click
@@ -90,15 +99,35 @@ window.onclick = function(event) {
     }
 };
 
-// Open photo directly if URL contains a Hash link
-window.addEventListener('load', () => {
-    showTab('home');
+// Handle Direct Links & Page Reloads (Deep Linking)
+function handleRouting() {
     const hash = window.location.hash.substring(1);
-    if (hash) {
+
+    if (!hash || hash === 'home') {
+        showTab('home', false);
+    } else if (['photography', 'about', 'contact'].includes(hash)) {
+        showTab(hash, false);
+    } else {
+        // If hash belongs to a specific photo, open Photography tab + Photo Modal directly
         const targetImg = document.querySelector(`img[data-id="${hash}"]`);
         if (targetImg) {
-            showTab('photography');
+            showTab('photography', false);
+            
+            // Auto-select correct category filter for the target photo
+            const parentCard = targetImg.closest('.photo-card');
+            if (parentCard) {
+                const categoryClass = Array.from(parentCard.classList).find(c => c !== 'photo-card');
+                const catBtn = document.getElementById(`btn-${categoryClass}`);
+                if (catBtn) filterGallery(categoryClass, { target: catBtn });
+            }
+            
             openModal(targetImg);
+        } else {
+            showTab('home', false);
         }
     }
-});
+}
+
+// Event Listeners for Page Load and Browser Back/Forward buttons
+window.addEventListener('DOMContentLoaded', handleRouting);
+window.addEventListener('hashchange', handleRouting);
