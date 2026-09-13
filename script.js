@@ -36,7 +36,6 @@ function openModal(imgElement) {
     
     captionText.innerHTML = `<h2>${imgElement.alt}</h2><p><strong>Location:</strong> ${location}</p><p>${desc}</p>`;
 
-    // Update Social Links & Likes
     setupInteractions(currentPhotoId);
 }
 
@@ -44,31 +43,47 @@ function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
 
-// Like and Share logic
+// Like & Share Logic
 function setupInteractions(id) {
-    // Fetch Likes
-    fetch(`https://api.countapi.xyz/get/natureclick_portfolio/${id}`)
+    // 1. Fetch Likes from CounterAPI (Live & Working API)
+    fetch(`https://api.counterapi.dev/v1/natureclick_munna/${id}`)
         .then(res => res.json())
         .then(data => {
-            document.getElementById("likeCount").innerText = data.value || 0;
+            document.getElementById("likeCount").innerText = data.count || 0;
         })
-        .catch(() => document.getElementById("likeCount").innerText = 0);
+        .catch(() => {
+            // Local fallback
+            let localLikes = localStorage.getItem('like_' + id) || 0;
+            document.getElementById("likeCount").innerText = localLikes;
+        });
 
-    // Set Share URLs
+    // 2. Setup Social Share Links
     const currentURL = window.location.href;
-    document.getElementById("shareWA").href = `https://api.whatsapp.com/send?text=Check out this photo on Nature Click: ${currentURL}`;
-    document.getElementById("shareFB").href = `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
+    const shareText = encodeURIComponent("Check out this photo on Nature Click by Munna: ");
+    
+    document.getElementById("shareWA").href = `https://api.whatsapp.com/send?text=${shareText}${encodeURIComponent(currentURL)}`;
+    document.getElementById("shareFB").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentURL)}`;
 }
 
+// Like Button Click Function
 function registerLike() {
-    fetch(`https://api.countapi.xyz/hit/natureclick_portfolio/${currentPhotoId}`)
+    if (!currentPhotoId) return;
+
+    fetch(`https://api.counterapi.dev/v1/natureclick_munna/${currentPhotoId}/up`)
         .then(res => res.json())
         .then(data => {
-            document.getElementById("likeCount").innerText = data.value;
+            document.getElementById("likeCount").innerText = data.count;
+        })
+        .catch(() => {
+            let localLikes = parseInt(localStorage.getItem('like_' + currentPhotoId) || 0) + 1;
+            localStorage.setItem('like_' + currentPhotoId, localLikes);
+            document.getElementById("likeCount").innerText = localLikes;
         });
 }
 
+// Copy Link Function
 function copyPhotoLink() {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Photo page link copied to clipboard!");
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Link copied to clipboard!");
+    });
 }
