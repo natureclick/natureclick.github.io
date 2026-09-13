@@ -1,5 +1,5 @@
-// Tab Switching System with Dynamic URL Routing
-function showTab(tabId, updateHash = true) {
+// Tab Switching System
+function showTab(tabId) {
     const sections = document.querySelectorAll('section');
     sections.forEach(sec => sec.classList.remove('active'));
 
@@ -14,15 +14,6 @@ function showTab(tabId, updateHash = true) {
     const activeNav = document.getElementById('nav-' + tabId);
     if (activeNav) {
         activeNav.classList.add('active');
-    }
-
-    // Update URL hash when clicking navigation tabs
-    if (updateHash) {
-        if (tabId === 'home') {
-            history.pushState("", document.title, window.location.pathname);
-        } else {
-            window.location.hash = tabId;
-        }
     }
 
     if (tabId === 'photography') {
@@ -54,7 +45,7 @@ function filterGallery(category, event) {
     });
 }
 
-// Image Modal System with Unique URL
+// Image Modal System
 function openModal(imgElement) {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('fullImg');
@@ -76,7 +67,7 @@ function openModal(imgElement) {
     
     document.body.style.overflow = 'hidden';
 
-    // Update URL Hash with photo ID
+    // Update URL Hash for Photo
     if (photoId) {
         window.location.hash = photoId;
     }
@@ -87,7 +78,7 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 
-    // Reset URL Hash back to Photography tab when modal is closed
+    // Reset URL back to Photography section
     window.location.hash = 'photography';
 }
 
@@ -99,35 +90,35 @@ window.onclick = function(event) {
     }
 };
 
-// Handle Direct Links & Page Reloads (Deep Linking)
-function handleRouting() {
-    const hash = window.location.hash.substring(1);
+// Router Logic based on URL Hash
+function handleRoute() {
+    const hash = window.location.hash.replace('#', '');
 
     if (!hash || hash === 'home') {
-        showTab('home', false);
+        showTab('home');
     } else if (['photography', 'about', 'contact'].includes(hash)) {
-        showTab(hash, false);
+        showTab(hash);
     } else {
-        // If hash belongs to a specific photo, open Photography tab + Photo Modal directly
+        // If Hash is a photo ID
         const targetImg = document.querySelector(`img[data-id="${hash}"]`);
         if (targetImg) {
-            showTab('photography', false);
+            showTab('photography');
             
-            // Auto-select correct category filter for the target photo
+            // Auto-filter to correct category
             const parentCard = targetImg.closest('.photo-card');
             if (parentCard) {
-                const categoryClass = Array.from(parentCard.classList).find(c => c !== 'photo-card');
-                const catBtn = document.getElementById(`btn-${categoryClass}`);
-                if (catBtn) filterGallery(categoryClass, { target: catBtn });
+                const cat = Array.from(parentCard.classList).find(c => c !== 'photo-card');
+                const catBtn = document.getElementById(`btn-${cat}`);
+                if (catBtn) filterGallery(cat, { target: catBtn });
             }
             
             openModal(targetImg);
         } else {
-            showTab('home', false);
+            showTab('home');
         }
     }
 }
 
-// Event Listeners for Page Load and Browser Back/Forward buttons
-window.addEventListener('DOMContentLoaded', handleRouting);
-window.addEventListener('hashchange', handleRouting);
+// Listen to URL changes and page loads
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('DOMContentLoaded', handleRoute);
