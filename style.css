@@ -140,11 +140,11 @@ section.active {
     margin: 0 !important;
 }
 
-/* Home Hero Area (Fix fallback image) */
+/* Home Hero Area (Updated to IMG_3702.jpg) */
 .hero {
     text-align: center;
     padding: 20px;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/20240423130415_IMG_4178.jpg');
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/IMG_3702.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
