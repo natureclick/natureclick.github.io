@@ -13,9 +13,6 @@
     <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="bHNCCGerxpzcyPPW-p6w0leXdLbx0E4rETaMWetJAvI" />
 
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +105,7 @@
         </div>
     </section>
 
-    <!-- 3. ABOUT SECTION -->
+    <!-- 3. ABOUT SECTION (Landscape Optimized Layout) -->
     <section id="about">
         <div class="about-content about-landscape">
             <h2>About <span class="flag-text">Nature Click</span></h2>
@@ -145,36 +142,11 @@
         <p>&copy; 2026 Nature Click | All Rights Reserved</p>
     </footer>
 
-    <!-- Fullscreen Image Modal Structure with Social Features -->
+    <!-- Fullscreen Image Modal Structure -->
     <div id="imageModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-wrapper">
-            <img class="modal-content" id="fullImg">
-            <div id="caption"></div>
-            
-            <!-- Engagement Controls: Like & Share -->
-            <div class="interaction-bar">
-                <button id="likeBtn" onclick="registerLike()"><i class="fa-solid fa-heart"></i> <span id="likeCount">0</span> Likes</button>
-                <div class="share-buttons">
-                    <span>Share:</span>
-                    <a id="shareWA" target="_blank" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a id="shareFB" target="_blank" title="Share on Facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <button onclick="copyPhotoLink()" title="Copy Link"><i class="fa-solid fa-link"></i></button>
-                </div>
-            </div>
-
-            <!-- Comments Box Container -->
-            <div class="comments-section">
-                <h3>Comments & Feedback</h3>
-                <script src="https://utteranc.es/client.js"
-                        repo="natureclick/natureclick.github.io"
-                        issue-term="pathname"
-                        theme="github-dark"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-            </div>
-        </div>
+        <img class="modal-content" id="fullImg">
+        <div id="caption"></div>
     </div>
 
     <script src="script.js"></script>
