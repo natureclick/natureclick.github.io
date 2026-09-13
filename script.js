@@ -16,7 +16,6 @@ function showTab(tabId) {
         activeNav.classList.add('active');
     }
 
-    // Default Filter View on Photography Tab Click
     if (tabId === 'photography') {
         const mountainBtn = document.getElementById('btn-mountain');
         if (mountainBtn) {
@@ -46,7 +45,7 @@ function filterGallery(category, event) {
     });
 }
 
-// Image Modal System
+// Image Modal System (With URL Update)
 function openModal(imgElement) {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('fullImg');
@@ -55,6 +54,7 @@ function openModal(imgElement) {
     const title = imgElement.getAttribute('alt') || '';
     const location = imgElement.getAttribute('data-location') || '';
     const desc = imgElement.getAttribute('data-description') || '';
+    const photoId = imgElement.getAttribute('data-id') || '';
 
     modal.style.display = 'block';
     modalImg.src = imgElement.src;
@@ -66,12 +66,20 @@ function openModal(imgElement) {
     `;
     
     document.body.style.overflow = 'hidden';
+
+    // Update URL Hash with photo ID
+    if (photoId) {
+        window.location.hash = photoId;
+    }
 }
 
 function closeModal() {
     const modal = document.getElementById('imageModal');
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+
+    // Reset URL Hash when closing modal
+    history.pushState("", document.title, window.location.pathname + window.location.search);
 }
 
 // Close Modal on Outside Click
@@ -82,7 +90,15 @@ window.onclick = function(event) {
     }
 };
 
-// Initial state on load
-document.addEventListener('DOMContentLoaded', () => {
+// Open photo directly if URL contains a Hash link
+window.addEventListener('load', () => {
     showTab('home');
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        const targetImg = document.querySelector(`img[data-id="${hash}"]`);
+        if (targetImg) {
+            showTab('photography');
+            openModal(targetImg);
+        }
+    }
 });
