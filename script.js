@@ -16,11 +16,14 @@ function showTab(tabId) {
         activeNav.classList.add('active');
     }
 
+    // Reset Category Buttons when switching to Photography Tab
     if (tabId === 'photography') {
-        const mountainBtn = document.getElementById('btn-mountain');
-        if (mountainBtn) {
-            filterGallery('mountain', { target: mountainBtn });
-        }
+        const buttons = document.querySelectorAll('.cat-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Hide all photo cards until a sub-tab is clicked
+        const cards = document.querySelectorAll('.photo-card');
+        cards.forEach(card => card.style.display = 'none');
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -104,7 +107,7 @@ function handleRoute() {
         if (targetImg) {
             showTab('photography');
             
-            // Auto-filter to correct category
+            // Auto-filter to correct category only when direct photo link is opened
             const parentCard = targetImg.closest('.photo-card');
             if (parentCard) {
                 const cat = Array.from(parentCard.classList).find(c => c !== 'photo-card');
