@@ -16,17 +16,23 @@ function showTab(tabId) {
         activeNav.classList.add('active');
     }
 
-    // Reset Category Buttons when switching to Photography Tab
+    // Photography ট্যাবে এলে সব বাটন ও ছবি হাইড রাখা হবে
     if (tabId === 'photography') {
-        const buttons = document.querySelectorAll('.cat-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-
-        // Hide all photo cards until a sub-tab is clicked
-        const cards = document.querySelectorAll('.photo-card');
-        cards.forEach(card => card.style.display = 'none');
+        clearPhotographyView();
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Photography পেজ ব্ল্যাংক করার ফাংশন
+function clearPhotographyView() {
+    const buttons = document.querySelectorAll('.cat-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    const cards = document.querySelectorAll('.photo-card');
+    cards.forEach(card => {
+        card.style.display = 'none';
+    });
 }
 
 // Category Filtering System
@@ -70,7 +76,6 @@ function openModal(imgElement) {
     
     document.body.style.overflow = 'hidden';
 
-    // Update URL Hash for Photo
     if (photoId) {
         window.location.hash = photoId;
     }
@@ -81,7 +86,6 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 
-    // Reset URL back to Photography section
     window.location.hash = 'photography';
 }
 
@@ -99,15 +103,17 @@ function handleRoute() {
 
     if (!hash || hash === 'home') {
         showTab('home');
-    } else if (['photography', 'about', 'contact'].includes(hash)) {
+    } else if (hash === 'photography') {
+        showTab('photography');
+        clearPhotographyView();
+    } else if (['about', 'contact'].includes(hash)) {
         showTab(hash);
     } else {
-        // If Hash is a photo ID
+        // Direct link to photo
         const targetImg = document.querySelector(`img[data-id="${hash}"]`);
         if (targetImg) {
             showTab('photography');
             
-            // Auto-filter to correct category only when direct photo link is opened
             const parentCard = targetImg.closest('.photo-card');
             if (parentCard) {
                 const cat = Array.from(parentCard.classList).find(c => c !== 'photo-card');
@@ -122,6 +128,5 @@ function handleRoute() {
     }
 }
 
-// Listen to URL changes and page loads
 window.addEventListener('hashchange', handleRoute);
 window.addEventListener('DOMContentLoaded', handleRoute);
