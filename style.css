@@ -140,7 +140,7 @@ section.active {
     margin: 0 !important;
 }
 
-/* Home Hero Area (Updated to IMG_3702.jpg) */
+/* Home Hero Area */
 .hero {
     text-align: center;
     padding: 20px;
@@ -211,6 +211,7 @@ section.active {
 }
 
 .photo-card {
+    display: none; /* ডিফল্টভাবে সব ছবি লুকানো থাকবে */
     position: relative;
     overflow: hidden;
     border-radius: 8px;
