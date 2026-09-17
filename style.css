@@ -510,6 +510,26 @@ section.active {
     background-color: #3ee29c;
 }
 
+.contact-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-status {
+    min-height: 20px;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.form-status.success {
+    color: #52f3af;
+}
+
+.form-status.error {
+    color: #ff6b6b;
+}
+
 /* Contact Section Redesign — two-column layout */
 .contact-landscape {
     max-width: 1000px;
