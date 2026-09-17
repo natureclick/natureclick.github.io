@@ -166,3 +166,47 @@ function handleRoute() {
 
 window.addEventListener('hashchange', handleRoute);
 window.addEventListener('DOMContentLoaded', handleRoute);
+
+// Contact Form Submission (Formspree — no page reload)
+window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', handleContactSubmit);
+    }
+});
+
+async function handleContactSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const statusEl = document.getElementById('form-status');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    statusEl.textContent = '';
+    statusEl.className = 'form-status';
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            statusEl.textContent = "Message sent! Thank you for reaching out — I'll get back to you soon.";
+            statusEl.className = 'form-status success';
+            form.reset();
+        } else {
+            statusEl.textContent = 'Something went wrong. Please try again, or reach out via Instagram instead.';
+            statusEl.className = 'form-status error';
+        }
+    } catch (error) {
+        statusEl.textContent = 'Something went wrong. Please check your connection and try again.';
+        statusEl.className = 'form-status error';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
+}
