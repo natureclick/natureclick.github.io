@@ -1,3 +1,6 @@
+// বর্তমান সিলেক্ট করা ক্যাটাগরি মনে রাখার জন্য গ্লোবাল ভ্যারিয়েবল
+let currentCategory = '';
+
 // Tab Switching System
 function showTab(tabId) {
     const sections = document.querySelectorAll('section');
@@ -16,8 +19,8 @@ function showTab(tabId) {
         activeNav.classList.add('active');
     }
 
-    // Photography ট্যাবে এলে সব বাটন ও ছবি হাইড রাখা হবে
-    if (tabId === 'photography') {
+    // Photography ট্যাবে প্রথমবার এলে সব বাটন ও ছবি হাইড থাকবে
+    if (tabId === 'photography' && !currentCategory) {
         clearPhotographyView();
     }
 
@@ -26,6 +29,7 @@ function showTab(tabId) {
 
 // Photography পেজ ব্ল্যাংক করার ফাংশন
 function clearPhotographyView() {
+    currentCategory = ''; // ক্যাটাগরি রিসেট করা হলো
     const buttons = document.querySelectorAll('.cat-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
 
@@ -37,11 +41,17 @@ function clearPhotographyView() {
 
 // Category Filtering System
 function filterGallery(category, event) {
+    currentCategory = category; // সিলেক্ট করা ক্যাটাগরি সেভ রাখা হলো
+    
     const buttons = document.querySelectorAll('.cat-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     
     if (event && event.target) {
         event.target.classList.add('active');
+    } else {
+        // ইভেন্ট না থাকলেও বাটন হাইলাইট করবে
+        const activeBtn = document.getElementById(`btn-${category}`);
+        if (activeBtn) activeBtn.classList.add('active');
     }
 
     const cards = document.querySelectorAll('.photo-card');
@@ -86,7 +96,13 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 
-    window.location.hash = 'photography';
+    // ছবি বন্ধ করলে যদি কোনো ক্যাটাগরি সিলেক্ট করা থাকে, তবে সেই ক্যাটাগরির ছবিগুলো দেখাবে
+    if (currentCategory) {
+        filterGallery(currentCategory);
+        window.location.hash = 'photography';
+    } else {
+        window.location.hash = 'photography';
+    }
 }
 
 // Close Modal on Outside Click
@@ -105,7 +121,11 @@ function handleRoute() {
         showTab('home');
     } else if (hash === 'photography') {
         showTab('photography');
-        clearPhotographyView();
+        if (currentCategory) {
+            filterGallery(currentCategory);
+        } else {
+            clearPhotographyView();
+        }
     } else if (['about', 'contact'].includes(hash)) {
         showTab(hash);
     } else {
@@ -117,8 +137,7 @@ function handleRoute() {
             const parentCard = targetImg.closest('.photo-card');
             if (parentCard) {
                 const cat = Array.from(parentCard.classList).find(c => c !== 'photo-card');
-                const catBtn = document.getElementById(`btn-${cat}`);
-                if (catBtn) filterGallery(cat, { target: catBtn });
+                if (cat) filterGallery(cat);
             }
             
             openModal(targetImg);
