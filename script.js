@@ -19,17 +19,12 @@ function showTab(tabId) {
         activeNav.classList.add('active');
     }
 
-    // Photography ট্যাবে প্রথমবার এলে সব বাটন ও ছবি হাইড থাকবে
-    if (tabId === 'photography' && !currentCategory) {
-        clearPhotographyView();
-    }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Photography পেজ ব্ল্যাংক করার ফাংশন
+// Photography পেজ ব্ল্যাংক/রিসেট করার ফাংশন (মেনু ক্লিকের জন্য)
 function clearPhotographyView() {
-    currentCategory = ''; // ক্যাটাগরি রিসেট করা হলো
+    currentCategory = ''; // ক্যাটাগরি ক্লিয়ার করা হলো
     const buttons = document.querySelectorAll('.cat-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
 
@@ -49,7 +44,6 @@ function filterGallery(category, event) {
     if (event && event.target) {
         event.target.classList.add('active');
     } else {
-        // ইভেন্ট না থাকলেও বাটন হাইলাইট করবে
         const activeBtn = document.getElementById(`btn-${category}`);
         if (activeBtn) activeBtn.classList.add('active');
     }
@@ -96,7 +90,7 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 
-    // ছবি বন্ধ করলে যদি কোনো ক্যাটাগরি সিলেক্ট করা থাকে, তবে সেই ক্যাটাগরির ছবিগুলো দেখাবে
+    // ছবি বন্ধ করলে আগের ফিল্টার করা ক্যাটাগরি বজায় থাকবে
     if (currentCategory) {
         filterGallery(currentCategory);
         window.location.hash = 'photography';
