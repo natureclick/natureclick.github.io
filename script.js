@@ -47,6 +47,11 @@ function clearPhotographyView() {
     });
 }
 
+// Home পেজের ক্যাটাগরি কার্ড ক্লিক করলে সরাসরি ফিল্টার করা গ্যালারিতে যাওয়ার জন্য
+function goToCategory(category) {
+    currentCategory = category;
+}
+
 // Category Filtering System
 function filterGallery(category, event) {
     currentCategory = category; // সিলেক্ট করা ক্যাটাগরি সেভ রাখা হলো
